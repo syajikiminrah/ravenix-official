@@ -1,0 +1,2942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>About | RAVENIX</title>
+
+<style>
+
+/* ==================================================
+   RESET
+================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #050505;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+::selection {
+    background: white;
+    color: black;
+}
+
+
+/* ==================================================
+   NAVIGATION
+================================================== */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 80px;
+
+    padding: 0 6%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    z-index: 5000;
+
+    background: rgba(5,5,5,.75);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.07);
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 7px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+}
+
+.nav-links a {
+    position: relative;
+
+    color: #999;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 3px;
+
+    transition: .3s;
+}
+
+.nav-links a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -9px;
+
+    width: 0;
+    height: 1px;
+
+    background: white;
+
+    transition: .3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: white;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+
+/* ==================================================
+   MOBILE MENU BUTTON
+================================================== */
+
+.menu-button {
+    display: none;
+
+    position: relative;
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    z-index: 5002;
+}
+
+.menu-button span {
+    position: absolute;
+
+    left: 8px;
+
+    width: 26px;
+    height: 1px;
+
+    background: white;
+
+    transition: .35s;
+}
+
+.menu-button span:nth-child(1) {
+    top: 14px;
+}
+
+.menu-button span:nth-child(2) {
+    top: 21px;
+}
+
+.menu-button span:nth-child(3) {
+    top: 28px;
+}
+
+.menu-button.active span:nth-child(1) {
+    top: 21px;
+    transform: rotate(45deg);
+}
+
+.menu-button.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-button.active span:nth-child(3) {
+    top: 21px;
+    transform: rotate(-45deg);
+}
+
+
+/* ==================================================
+   MOBILE MENU
+================================================== */
+
+.mobile-menu {
+    position: fixed;
+
+    inset: 0;
+
+    height: 100dvh;
+
+    z-index: 4999;
+
+    background:
+        rgba(3,3,3,.98);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+        translateY(-15px);
+
+    transition: .35s;
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        translateY(0);
+}
+
+.mobile-menu-small {
+    color: #555;
+
+    font-size: 8px;
+
+    letter-spacing: 6px;
+
+    margin-bottom: 35px;
+}
+
+.mobile-menu a {
+    margin: 10px;
+
+    color: white;
+
+    font-size:
+        clamp(28px,9vw,42px);
+
+    letter-spacing: 5px;
+}
+
+.mobile-menu-bottom {
+    position: absolute;
+
+    bottom: 35px;
+
+    color: #444;
+
+    font-size: 8px;
+
+    letter-spacing: 4px;
+}
+
+
+/* ==================================================
+   HERO
+================================================== */
+
+.hero {
+    min-height: 100svh;
+
+    position: relative;
+
+    display: flex;
+    align-items: flex-end;
+
+    padding:
+        160px 7%
+        100px;
+
+    overflow: hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 70% 30%,
+            #191919,
+            #050505 55%
+        );
+}
+
+
+/* HUGE BACKGROUND R */
+
+.hero::before {
+    content: "R";
+
+    position: absolute;
+
+    right: -4%;
+    top: 5%;
+
+    color: transparent;
+
+    font-size:
+        clamp(350px,48vw,750px);
+
+    font-weight: bold;
+
+    line-height: 1;
+
+    -webkit-text-stroke:
+        1px #181818;
+
+    pointer-events: none;
+}
+
+
+/* LIGHT */
+
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 700px;
+    height: 700px;
+
+    left: -250px;
+    bottom: -350px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.025);
+
+    filter: blur(50px);
+
+    animation:
+        heroGlow 7s
+        ease-in-out infinite alternate;
+}
+
+@keyframes heroGlow {
+
+    from {
+        transform:
+            scale(.9);
+    }
+
+    to {
+        transform:
+            scale(1.2);
+    }
+
+}
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 1200px;
+}
+
+.hero-small {
+    color: #666;
+
+    font-size: 9px;
+
+    letter-spacing: 7px;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size:
+        clamp(75px,13vw,180px);
+
+    line-height: .8;
+
+    letter-spacing: 5px;
+}
+
+.hero-line {
+    width: 100px;
+    height: 1px;
+
+    background: #555;
+
+    margin: 40px 0;
+}
+
+.hero p {
+    max-width: 700px;
+
+    color: #888;
+
+    font-size: 12px;
+
+    line-height: 2;
+
+    letter-spacing: 4px;
+}
+
+
+/* ==================================================
+   RAVENIX STORY
+================================================== */
+
+.group-story {
+    position: relative;
+
+    padding:
+        150px 7%;
+
+    border-top:
+        1px solid #151515;
+
+    overflow: hidden;
+}
+
+.story-number {
+    color: #444;
+
+    font-size: 9px;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 25px;
+}
+
+.story-heading {
+    font-size:
+        clamp(45px,8vw,105px);
+
+    letter-spacing: 3px;
+
+    line-height: .95;
+}
+
+.story-heading span {
+    color: #444;
+}
+
+.story-layout {
+    display: grid;
+
+    grid-template-columns:
+        .8fr 1.2fr;
+
+    gap: 100px;
+
+    margin-top: 90px;
+}
+
+.story-quote {
+    position: sticky;
+
+    top: 140px;
+
+    align-self: start;
+}
+
+.story-quote p {
+    max-width: 430px;
+
+    font-size:
+        clamp(25px,3vw,42px);
+
+    font-weight: bold;
+
+    line-height: 1.3;
+
+    letter-spacing: -1px;
+}
+
+.story-quote span {
+    display: block;
+
+    margin-top: 30px;
+
+    color: #555;
+
+    font-size: 9px;
+
+    letter-spacing: 5px;
+}
+
+.story-copy {
+    max-width: 760px;
+}
+
+.story-copy p {
+    color: #aaa;
+
+    font-size: 18px;
+
+    line-height: 2;
+
+    margin-bottom: 35px;
+}
+
+.story-copy strong {
+    color: white;
+}
+
+
+/* ==================================================
+   STORY DIVIDER
+================================================== */
+
+.story-transition {
+    padding:
+        70px 7% 150px;
+
+    text-align: center;
+}
+
+.story-transition-line {
+    width: 1px;
+    height: 100px;
+
+    background:
+        linear-gradient(
+            transparent,
+            #555,
+            transparent
+        );
+
+    margin:
+        0 auto 50px;
+}
+
+.story-transition p {
+    color: #666;
+
+    font-size: 9px;
+
+    letter-spacing: 6px;
+}
+
+.story-transition h3 {
+    margin-top: 20px;
+
+    font-size:
+        clamp(30px,5vw,65px);
+
+    letter-spacing: 2px;
+}
+
+
+/* ==================================================
+   MEET THE FIVE
+================================================== */
+
+.members-section {
+    padding:
+        130px 5% 150px;
+
+    border-top:
+        1px solid #151515;
+}
+
+.section-label {
+    color: #555;
+
+    font-size: 9px;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 20px;
+}
+
+.members-section > h2 {
+    font-size:
+        clamp(50px,8vw,100px);
+
+    letter-spacing: 4px;
+}
+
+.members-intro {
+    margin-top: 25px;
+
+    color: #777;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+}
+
+.member-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    gap: 14px;
+
+    margin-top: 75px;
+}
+
+
+/* ==================================================
+   MEMBER CARD
+================================================== */
+
+.member-card {
+    position: relative;
+
+    height: 500px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    background: #0b0b0b;
+
+    border:
+        1px solid #1b1b1b;
+
+    transition:
+        transform .5s,
+        border-color .5s;
+}
+
+.member-card img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    filter:
+        grayscale(20%)
+        brightness(.72);
+
+    transition:
+        transform .7s,
+        filter .7s;
+}
+
+.member-card::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    background:
+        linear-gradient(
+            transparent 40%,
+            rgba(0,0,0,.95)
+        );
+}
+
+.member-card::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background:
+        var(--accent);
+
+    transform:
+        scaleX(0);
+
+    transition:
+        transform .4s;
+}
+
+.member-card:hover {
+    transform:
+        translateY(-8px);
+
+    border-color:
+        rgba(255,255,255,.2);
+}
+
+.member-card:hover img {
+    transform:
+        scale(1.05);
+
+    filter:
+        grayscale(0)
+        brightness(.9);
+}
+
+.member-card:hover::after {
+    transform:
+        scaleX(1);
+}
+
+.member-info {
+    position: absolute;
+
+    z-index: 2;
+
+    left: 24px;
+    right: 20px;
+    bottom: 25px;
+}
+
+.member-number {
+    color:
+        var(--accent);
+
+    font-size: 8px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 10px;
+}
+
+.member-info h3 {
+    font-size: 27px;
+
+    letter-spacing: 3px;
+}
+
+.member-info p {
+    color: #888;
+
+    margin-top: 8px;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    line-height: 1.6;
+}
+
+.member-open {
+    margin-top: 15px;
+
+    color: #aaa;
+
+    font-size: 7px;
+
+    letter-spacing: 3px;
+
+    opacity: 0;
+
+    transform:
+        translateY(8px);
+
+    transition: .4s;
+}
+
+.member-card:hover
+.member-open {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* MEMBER COLORS */
+
+.kael {
+    --accent: #c7c7c7;
+}
+
+.zayn {
+    --accent: #b94a4a;
+}
+
+.rayden {
+    --accent: #8f6ec4;
+}
+
+.elior {
+    --accent: #d2d2d2;
+}
+
+.nox {
+    --accent: #5b82c9;
+}
+
+
+/* ==================================================
+   MEMBER STORY AREA
+================================================== */
+
+.member-story-area {
+    position: relative;
+
+    display: none;
+
+    min-height: 100vh;
+
+    padding:
+        130px 7%;
+
+    overflow: hidden;
+
+    border-top:
+        1px solid #171717;
+
+    --accent: #fff;
+}
+
+.member-story-area.active {
+    display: block;
+
+    animation:
+        storyAppear
+        .7s ease;
+}
+
+@keyframes storyAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+/* BACKGROUND GLOW */
+
+.member-story-area::before {
+    content: "";
+
+    position: absolute;
+
+    width: 800px;
+    height: 800px;
+
+    right: -350px;
+    top: 0;
+
+    border-radius: 50%;
+
+    background:
+        var(--accent);
+
+    opacity: .07;
+
+    filter:
+        blur(130px);
+
+    pointer-events: none;
+
+    animation:
+        memberGlow
+        6s ease-in-out
+        infinite alternate;
+}
+
+@keyframes memberGlow {
+
+    from {
+        transform:
+            scale(.85);
+    }
+
+    to {
+        transform:
+            scale(1.15);
+    }
+
+}
+
+
+/* ==================================================
+   STORY HEADER
+================================================== */
+
+.member-story-top {
+    position: relative;
+
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(320px,520px)
+        minmax(0,1fr);
+
+    gap: 80px;
+
+    max-width: 1450px;
+
+    margin: auto;
+}
+
+.member-story-image {
+    position: relative;
+
+    height: 700px;
+
+    overflow: hidden;
+
+    background: #111;
+}
+
+.member-story-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.member-story-image::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    box-shadow:
+        inset 0 -150px 120px
+        rgba(0,0,0,.3);
+
+    pointer-events: none;
+}
+
+
+/* ==================================================
+   STORY INFO
+================================================== */
+
+.member-story-info {
+    align-self: center;
+}
+
+.member-story-number {
+    color:
+        var(--accent);
+
+    font-size: 9px;
+
+    letter-spacing: 6px;
+
+    margin-bottom: 25px;
+}
+
+.member-story-info h2 {
+    font-size:
+        clamp(60px,9vw,130px);
+
+    line-height: .85;
+
+    letter-spacing: 2px;
+}
+
+.member-real-name {
+    margin-top: 25px;
+
+    color: #aaa;
+
+    font-size: 15px;
+
+    letter-spacing: 3px;
+}
+
+.member-position {
+    margin-top: 12px;
+
+    color:
+        var(--accent);
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+}
+
+.story-title {
+    margin-top: 55px;
+
+    color: #666;
+
+    font-size: 9px;
+
+    letter-spacing: 5px;
+}
+
+.story-title-main {
+    margin-top: 12px;
+
+    font-size:
+        clamp(24px,3vw,40px);
+
+    font-weight: bold;
+
+    line-height: 1.3;
+}
+
+
+/* ==================================================
+   MEMBER JOURNEY
+================================================== */
+
+.member-journey {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 900px;
+
+    margin:
+        120px auto 0;
+}
+
+.journey-label {
+    color:
+        var(--accent);
+
+    font-size: 9px;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 40px;
+}
+
+.journey-item {
+    position: relative;
+
+    padding:
+        0 0 45px 45px;
+
+    border-left:
+        1px solid #252525;
+
+    color: #aaa;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+}
+
+.journey-item::before {
+    content: "";
+
+    position: absolute;
+
+    left: -4px;
+    top: 9px;
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background:
+        var(--accent);
+
+    box-shadow:
+        0 0 20px
+        var(--accent);
+}
+
+.journey-item:last-child {
+    border-left:
+        1px solid transparent;
+}
+
+
+/* ==================================================
+   MEMBER FINAL QUOTE
+================================================== */
+
+.member-ending {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 1050px;
+
+    margin:
+        100px auto;
+
+    padding:
+        80px 40px;
+
+    text-align: center;
+
+    border-top:
+        1px solid #222;
+
+    border-bottom:
+        1px solid #222;
+}
+
+.member-ending-small {
+    color:
+        var(--accent);
+
+    font-size: 8px;
+
+    letter-spacing: 6px;
+
+    margin-bottom: 25px;
+}
+
+.member-ending blockquote {
+    font-size:
+        clamp(25px,4vw,50px);
+
+    font-weight: bold;
+
+    line-height: 1.35;
+}
+
+
+/* ==================================================
+   MEMBER CONTROLS
+================================================== */
+
+.member-controls {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 1050px;
+
+    margin:
+        0 auto;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+}
+
+.member-controls button {
+    border: none;
+
+    background: transparent;
+
+    color: #888;
+
+    cursor: pointer;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    transition: .3s;
+}
+
+.member-controls button:hover {
+    color: white;
+}
+
+.close-story {
+    padding:
+        13px 20px !important;
+
+    border:
+        1px solid #333 !important;
+}
+
+
+/* ==================================================
+   FINAL BRANDING
+================================================== */
+
+.final-section {
+    min-height: 600px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 100px 20px;
+
+    border-top:
+        1px solid #151515;
+
+    background:
+
+        radial-gradient(
+            circle,
+            #171717,
+            #050505 65%
+        );
+}
+
+.final-small {
+    color: #555;
+
+    font-size: 9px;
+
+    letter-spacing: 7px;
+}
+
+.final-section h2 {
+    margin-top: 25px;
+
+    font-size:
+        clamp(65px,13vw,180px);
+
+    letter-spacing: 8px;
+}
+
+.final-section p {
+    margin-top: 30px;
+
+    color: #888;
+
+    font-size: 11px;
+
+    letter-spacing: 6px;
+}
+
+
+/* ==================================================
+   FOOTER
+================================================== */
+
+footer {
+    padding:
+        40px 7%;
+
+    border-top:
+        1px solid #171717;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    color: #555;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+}
+
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media(max-width:1050px) {
+
+    .story-layout {
+        grid-template-columns: 1fr;
+
+        gap: 55px;
+    }
+
+    .story-quote {
+        position: static;
+    }
+
+    .member-grid {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .member-card:last-child {
+        grid-column:
+            1 / 3;
+
+        width: 50%;
+
+        justify-self: center;
+    }
+
+    .member-story-top {
+        grid-template-columns:
+            minmax(280px,400px)
+            minmax(0,1fr);
+
+        gap: 50px;
+    }
+
+    .member-story-image {
+        height: 570px;
+    }
+
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media(max-width:700px) {
+
+    nav {
+        height: 65px;
+
+        padding:
+            0 18px;
+    }
+
+    .logo {
+        font-size: 16px;
+
+        letter-spacing: 5px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+
+    /* HERO */
+
+    .hero {
+        min-height: 650px;
+
+        padding:
+            130px 20px
+            70px;
+    }
+
+    .hero::before {
+        top: 100px;
+
+        right: -70px;
+
+        font-size: 390px;
+    }
+
+    .hero h1 {
+        font-size:
+            clamp(65px,21vw,100px);
+
+        letter-spacing: 2px;
+    }
+
+    .hero-small {
+        font-size: 7px;
+
+        letter-spacing: 5px;
+    }
+
+    .hero p {
+        font-size: 9px;
+
+        letter-spacing: 3px;
+    }
+
+
+    /* GROUP STORY */
+
+    .group-story {
+        padding:
+            90px 20px;
+    }
+
+    .story-heading {
+        font-size: 50px;
+    }
+
+    .story-layout {
+        margin-top: 55px;
+    }
+
+    .story-quote p {
+        font-size: 27px;
+    }
+
+    .story-copy p {
+        font-size: 16px;
+
+        line-height: 1.9;
+    }
+
+    .story-transition {
+        padding:
+            40px 20px 100px;
+    }
+
+
+    /* MEMBERS */
+
+    .members-section {
+        padding:
+            90px 20px 110px;
+    }
+
+    .members-section > h2 {
+        font-size: 50px;
+    }
+
+    .members-intro {
+        line-height: 1.8;
+    }
+
+    .member-grid {
+        grid-template-columns:
+            1fr;
+
+        gap: 18px;
+
+        margin-top: 50px;
+    }
+
+    .member-card,
+    .member-card:last-child {
+        width: 100%;
+
+        height: 520px;
+
+        grid-column: auto;
+    }
+
+    .member-open {
+        opacity: 1;
+
+        transform: none;
+    }
+
+
+    /* STORY */
+
+    .member-story-area {
+        padding:
+            80px 20px;
+    }
+
+    .member-story-top {
+        display: block;
+    }
+
+    .member-story-image {
+        width: 100%;
+        height: 560px;
+
+        margin-bottom: 50px;
+    }
+
+    .member-story-info h2 {
+        font-size:
+            clamp(60px,20vw,95px);
+    }
+
+    .member-real-name {
+        font-size: 13px;
+
+        line-height: 1.7;
+    }
+
+    .member-position {
+        line-height: 1.8;
+    }
+
+    .story-title {
+        margin-top: 40px;
+    }
+
+    .story-title-main {
+        font-size: 26px;
+    }
+
+
+    /* JOURNEY */
+
+    .member-journey {
+        margin-top: 80px;
+    }
+
+    .journey-item {
+        padding:
+            0 0 40px 30px;
+
+        font-size: 15px;
+
+        line-height: 1.8;
+    }
+
+
+    /* QUOTE */
+
+    .member-ending {
+        margin:
+            70px auto;
+
+        padding:
+            55px 10px;
+    }
+
+    .member-ending blockquote {
+        font-size: 26px;
+    }
+
+
+    /* CONTROLS */
+
+    .member-controls {
+        gap: 15px;
+    }
+
+    .member-controls button {
+        font-size: 7px;
+
+        letter-spacing: 2px;
+    }
+
+    .close-story {
+        padding:
+            11px 12px !important;
+    }
+
+
+    /* FINAL */
+
+    .final-section {
+        min-height: 500px;
+    }
+
+    .final-section h2 {
+        font-size: 60px;
+
+        letter-spacing: 4px;
+    }
+
+    .final-section p {
+        font-size: 8px;
+
+        letter-spacing: 4px;
+    }
+
+
+    /* FOOTER */
+
+    footer {
+        display: block;
+
+        text-align: center;
+
+        line-height: 2.2;
+    }
+
+    footer span {
+        display: block;
+    }
+
+}
+
+
+/* ==================================================
+   VERY SMALL PHONE
+================================================== */
+
+@media(max-width:360px) {
+
+    .hero h1 {
+        font-size: 58px;
+    }
+
+    .story-heading {
+        font-size: 42px;
+    }
+
+    .members-section > h2 {
+        font-size: 42px;
+    }
+
+    .member-card {
+        height: 450px;
+    }
+
+    .member-story-image {
+        height: 470px;
+    }
+
+}
+
+
+/* ==================================================
+   REDUCED MOTION
+================================================== */
+
+@media(prefers-reduced-motion:reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration:
+            .01ms !important;
+
+        transition-duration:
+            .01ms !important;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     NAVIGATION
+================================================== -->
+
+<nav>
+
+    <a
+        href="home.html"
+        class="logo"
+    >
+        RAVENIX
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="home.html">
+            HOME
+        </a>
+
+        <a href="home.html#members">
+            MEMBERS
+        </a>
+
+        <a href="songs.html">
+            SONGS
+        </a>
+
+        <a
+            href="about.html"
+            class="active"
+        >
+            ABOUT
+        </a>
+
+        <a href="contact.html">
+            CONTACT
+        </a>
+
+    </div>
+
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        onclick="toggleMenu()"
+        aria-label="Open menu"
+    >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+</nav>
+
+
+<!-- ==================================================
+     MOBILE MENU
+================================================== -->
+
+<div
+    class="mobile-menu"
+    id="mobileMenu"
+>
+
+    <div class="mobile-menu-small">
+        RAVENIX OFFICIAL
+    </div>
+
+    <a href="home.html">
+        HOME
+    </a>
+
+    <a href="home.html#members">
+        MEMBERS
+    </a>
+
+    <a href="songs.html">
+        SONGS
+    </a>
+
+    <a
+        href="about.html"
+        onclick="closeMenu()"
+    >
+        ABOUT
+    </a>
+
+    <a href="contact.html">
+        CONTACT
+    </a>
+
+
+    <div class="mobile-menu-bottom">
+        FIVE SHADOWS • ONE LEGACY
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     HERO
+================================================== -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-small">
+            RAVENIX / THE STORY
+        </div>
+
+        <h1>
+            ABOUT
+        </h1>
+
+        <div class="hero-line"></div>
+
+        <p>
+            FIVE DIFFERENT PATHS.<br>
+            ONE PLACE TO BELONG.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     RAVENIX STORY
+================================================== -->
+
+<section class="group-story">
+
+    <div class="story-number">
+        01 / THE BEGINNING
+    </div>
+
+
+    <h2 class="story-heading">
+
+        THE RAVENIX<br>
+
+        <span>
+            STORY.
+        </span>
+
+    </h2>
+
+
+    <div class="story-layout">
+
+
+        <div class="story-quote">
+
+            <p>
+                “Five very different
+                people finding one
+                place where they
+                finally belong.”
+            </p>
+
+            <span>
+                RAVENIX
+            </span>
+
+        </div>
+
+
+        <div class="story-copy">
+
+            <p>
+
+                <strong>
+                    RAVENIX (레이브닉스)
+                </strong>
+
+                is a five-member
+                South Korean boy group
+                built around the idea of
+
+                <strong>
+                    five very different
+                    people finding one
+                    place where they
+                    finally belong.
+                </strong>
+
+            </p>
+
+
+            <p>
+
+                Before becoming RAVENIX,
+
+                <strong>
+                    Kael, Zayn, Nox,
+                    Elior, and Rayden
+                    weren't originally
+                    meant to debut together.
+                </strong>
+
+                They entered the company
+                at different times,
+                trained for different
+                projects, and had
+                completely different
+                strengths.
+
+            </p>
+
+
+            <p>
+
+                Some had already watched
+                friends debut while they
+                remained trainees.
+
+                Others had been moved
+                between potential lineups
+                so many times that debut
+                started to feel impossible.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     TRANSITION
+================================================== -->
+
+<section class="story-transition">
+
+    <div class="story-transition-line"></div>
+
+    <p>
+        FIVE SEPARATE PATHS
+    </p>
+
+    <h3>
+        UNTIL THEIR PATHS CROSSED.
+    </h3>
+
+</section>
+
+
+<!-- ==================================================
+     MEMBERS
+================================================== -->
+
+<section
+    class="members-section"
+    id="members"
+>
+
+    <div class="section-label">
+        02 / THEIR STORIES
+    </div>
+
+    <h2>
+        MEET THE FIVE
+    </h2>
+
+    <p class="members-intro">
+        SELECT A MEMBER TO DISCOVER HIS STORY.
+    </p>
+
+
+    <div class="member-grid">
+
+
+        <!-- KAEL -->
+
+        <article
+            class="member-card kael"
+            onclick="openMember('kael')"
+        >
+
+            <img
+                src="kael.png"
+                alt="Kael"
+            >
+
+            <div class="member-info">
+
+                <div class="member-number">
+                    01 / LEADER
+                </div>
+
+                <h3>
+                    KAEL
+                </h3>
+
+                <p>
+                    LEADER • MAIN RAPPER<br>
+                    PRODUCER
+                </p>
+
+                <div class="member-open">
+                    DISCOVER HIS STORY →
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- ZAYN -->
+
+        <article
+            class="member-card zayn"
+            onclick="openMember('zayn')"
+        >
+
+            <img
+                src="zayn.png"
+                alt="Zayn"
+            >
+
+            <div class="member-info">
+
+                <div class="member-number">
+                    02 / RAPPER
+                </div>
+
+                <h3>
+                    ZAYN
+                </h3>
+
+                <p>
+                    LEAD RAPPER • VISUAL
+                </p>
+
+                <div class="member-open">
+                    DISCOVER HIS STORY →
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- RAYDEN -->
+
+        <article
+            class="member-card rayden"
+            onclick="openMember('rayden')"
+        >
+
+            <img
+                src="rayden.png"
+                alt="Rayden"
+            >
+
+            <div class="member-info">
+
+                <div class="member-number">
+                    03 / VOCAL
+                </div>
+
+                <h3>
+                    RAYDEN
+                </h3>
+
+                <p>
+                    MAIN VOCALIST
+                </p>
+
+                <div class="member-open">
+                    DISCOVER HIS STORY →
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- ELIOR -->
+
+        <article
+            class="member-card elior"
+            onclick="openMember('elior')"
+        >
+
+            <img
+                src="elior.png"
+                alt="Elior"
+            >
+
+            <div class="member-info">
+
+                <div class="member-number">
+                    04 / DANCE
+                </div>
+
+                <h3>
+                    ELIOR
+                </h3>
+
+                <p>
+                    MAIN DANCER • VISUAL
+                </p>
+
+                <div class="member-open">
+                    DISCOVER HIS STORY →
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- NOX -->
+
+        <article
+            class="member-card nox"
+            onclick="openMember('nox')"
+        >
+
+            <img
+                src="nox.png"
+                alt="Nox"
+            >
+
+            <div class="member-info">
+
+                <div class="member-number">
+                    05 / MAKNAE
+                </div>
+
+                <h3>
+                    NOX
+                </h3>
+
+                <p>
+                    MAKNAE • LEAD VOCALIST
+                </p>
+
+                <div class="member-open">
+                    DISCOVER HIS STORY →
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     MEMBER STORY
+     CONTENT FILLED BY JAVASCRIPT
+================================================== -->
+
+<section
+    class="member-story-area"
+    id="memberStory"
+>
+
+    <div class="member-story-top">
+
+
+        <div class="member-story-image">
+
+            <img
+                id="storyImage"
+                src=""
+                alt=""
+            >
+
+        </div>
+
+
+        <div class="member-story-info">
+
+            <div
+                class="member-story-number"
+                id="storyNumber"
+            ></div>
+
+            <h2 id="storyName"></h2>
+
+            <div
+                class="member-real-name"
+                id="storyRealName"
+            ></div>
+
+            <div
+                class="member-position"
+                id="storyPosition"
+            ></div>
+
+
+            <div class="story-title">
+                HIS STORY
+            </div>
+
+            <div
+                class="story-title-main"
+                id="storyTitle"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <div class="member-journey">
+
+        <div class="journey-label">
+            THE JOURNEY
+        </div>
+
+        <div id="journeyContent"></div>
+
+    </div>
+
+
+    <div class="member-ending">
+
+        <div class="member-ending-small">
+            HIS STORY
+        </div>
+
+        <blockquote id="storyQuote"></blockquote>
+
+    </div>
+
+
+    <div class="member-controls">
+
+        <button onclick="previousMember()">
+            ← PREVIOUS
+        </button>
+
+
+        <button
+            class="close-story"
+            onclick="closeMember()"
+        >
+            ALL MEMBERS
+        </button>
+
+
+        <button onclick="nextMember()">
+            NEXT →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     FINAL
+================================================== -->
+
+<section class="final-section">
+
+    <div>
+
+        <div class="final-small">
+            KAEL • ZAYN • RAYDEN • ELIOR • NOX
+        </div>
+
+        <h2>
+            RAVENIX
+        </h2>
+
+        <p>
+            FIVE SHADOWS. ONE LEGACY.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer>
+
+    <span>
+        © 2026 RAVENIX
+    </span>
+
+    <span>
+        OFFICIAL WEBSITE
+    </span>
+
+</footer>
+
+
+<script>
+
+/* ==================================================
+   MOBILE MENU
+================================================== */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+const mobileMenu =
+    document.getElementById(
+        "mobileMenu"
+    );
+
+
+function toggleMenu() {
+
+    const open =
+        mobileMenu.classList.toggle(
+            "active"
+        );
+
+    menuButton.classList.toggle(
+        "active",
+        open
+    );
+
+    document.body.classList.toggle(
+        "no-scroll",
+        open
+    );
+
+}
+
+
+function closeMenu() {
+
+    mobileMenu.classList.remove(
+        "active"
+    );
+
+    menuButton.classList.remove(
+        "active"
+    );
+
+    document.body.classList.remove(
+        "no-scroll"
+    );
+
+}
+
+
+/* ==================================================
+   MEMBER DATA
+================================================== */
+
+const members = [
+
+    {
+
+        id: "kael",
+
+        number: "01 / LEADER",
+
+        name: "KAEL",
+
+        realName:
+            "SEO KANG-HYUN (서강현)",
+
+        position:
+            "LEADER • MAIN RAPPER • PRODUCER",
+
+        image:
+            "kael.png",
+
+        color:
+            "#c7c7c7",
+
+        title:
+            "THE ONE WHO STAYED",
+
+        journey: [
+
+            "One of the longest-training members of RAVENIX.",
+
+            "Originally entered the company purely as a rapper but became interested in songwriting and production.",
+
+            "Known for staying alone in the studio late at night, sometimes working on the same demo until morning.",
+
+            "Watched several trainees he knew debut while he remained behind.",
+
+            "Considered giving up more than once but kept telling himself he needed to give it “one more year.”",
+
+            "His ability to guide other trainees eventually made the company consider him for the leader position of a new group.",
+
+            "Helped Rayden with dance practice when Rayden was struggling.",
+
+            "Later invited Elior to practice with his team after discovering him dancing alone.",
+
+            "Became the person who quietly held the future RAVENIX lineup together before RAVENIX even had a name."
+
+        ],
+
+        quote:
+            "He waited the longest so the others would have someone waiting for them."
+
+    },
+
+
+    {
+
+        id: "zayn",
+
+        number: "02 / RAPPER",
+
+        name: "ZAYN",
+
+        realName:
+            "KANG JI-HWAN (강지환)",
+
+        position:
+            "LEAD RAPPER • VISUAL",
+
+        image:
+            "zayn.png",
+
+        color:
+            "#b94a4a",
+
+        title:
+            "THE ONE WHO REFUSED TO CHANGE",
+
+        journey: [
+
+            "Entered the company with natural confidence and a strong stage presence.",
+
+            "Quickly became known among trainees for his visuals and charisma.",
+
+            "Preferred performing through instinct rather than obsessing over every technical detail.",
+
+            "This frequently put him at odds with Kael, who wanted everything perfected.",
+
+            "Their trainee arguments became almost legendary among the members.",
+
+            "Behind his confidence, Zayn hated being told he needed to change his personality to become more “idol-like.”",
+
+            "Instead of becoming quieter, he learned how to control that confidence and use it onstage.",
+
+            "Eventually became one of Kael's closest friends despite their completely different personalities.",
+
+            "He is often the member willing to say what everyone else is thinking."
+
+        ],
+
+        quote:
+            "He didn't change who he was to fit the stage. He learned how to make the stage fit him."
+
+    },
+
+
+    {
+
+        id: "rayden",
+
+        number: "03 / VOCAL",
+
+        name: "RAYDEN",
+
+        realName:
+            "PARK MIN-JAE (박민재)",
+
+        position:
+            "MAIN VOCALIST",
+
+        image:
+            "rayden.png",
+
+        color:
+            "#8f6ec4",
+
+        title:
+            "THE VOICE THAT ALMOST WASN'T HEARD",
+
+        journey: [
+
+            "Joined the company because of his voice.",
+
+            "Vocally, he was one of the strongest trainees—but dancing was another story.",
+
+            "Regularly stayed after official practice because he struggled to keep up with choreography.",
+
+            "Kael noticed and began practicing with him after everyone else had left.",
+
+            "Their friendship became one of the oldest within RAVENIX.",
+
+            "Rayden sometimes worried that vocals alone wouldn't be enough to earn him a debut.",
+
+            "Instead of hiding his weakness, he worked relentlessly on it.",
+
+            "Eventually developed enough confidence to perform without constantly worrying about making mistakes.",
+
+            "His emotional vocal style later became one of the defining sounds of RAVENIX."
+
+        ],
+
+        quote:
+            "The thing he feared would keep him from the stage became the reason he fought hardest to reach it."
+
+    },
+
+
+    {
+
+        id: "elior",
+
+        number: "04 / DANCE",
+
+        name: "ELIOR",
+
+        realName:
+            "JEONG TAE-MIN (정태민)",
+
+        position:
+            "MAIN DANCER • VISUAL",
+
+        image:
+            "elior.png",
+
+        color:
+            "#d2d2d2",
+
+        title:
+            "THE ONE WHO ALMOST LEFT",
+
+        journey: [
+
+            "Was originally training to debut in a completely different group.",
+
+            "Became known as one of the company's strongest dancers.",
+
+            "Spent months preparing for his expected debut.",
+
+            "Then the project was suddenly cancelled.",
+
+            "Watching everything he had worked toward disappear left Elior questioning whether he wanted to remain a trainee.",
+
+            "He began practicing alone and seriously considered leaving the company.",
+
+            "One night, Kael found him in a practice room and asked him to join his team's next evaluation.",
+
+            "Elior initially treated it as nothing more than another evaluation.",
+
+            "But performing alongside Kael, Zayn and Rayden made him reconsider leaving.",
+
+            "He eventually became the fourth permanent member."
+
+        ],
+
+        quote:
+            "The ending he feared became the beginning he never expected."
+
+    },
+
+
+    {
+
+        id: "nox",
+
+        number: "05 / MAKNAE",
+
+        name: "NOX",
+
+        realName:
+            "HAN SI-WOO (한시우)",
+
+        position:
+            "MAKNAE • LEAD VOCALIST",
+
+        image:
+            "nox.png",
+
+        color:
+            "#5b82c9",
+
+        title:
+            "THE MEMBER WHO WAS SUPPOSED TO BE TEMPORARY",
+
+        journey: [
+
+            "Entered the company later than the other members.",
+
+            "Was one of the youngest trainees and wasn't expected to debut anytime soon.",
+
+            "Still lacked the years of experience the others had accumulated.",
+
+            "Shortly before a major evaluation, the planned lineup unexpectedly lost a member.",
+
+            "Nox was selected as a temporary replacement.",
+
+            "He believed he would perform with them once and then return to normal training.",
+
+            "Instead, his lighter vocal tone complemented Rayden's voice and changed the balance of the entire group.",
+
+            "His personality also softened the dynamic between the four older members.",
+
+            "After seeing the five perform together, the company decided not to search for another trainee.",
+
+            "Nox was officially added to the lineup."
+
+        ],
+
+        quote:
+            "He walked into the room as a replacement and walked out as the missing member."
+
+    }
+
+];
+
+
+/* ==================================================
+   CURRENT MEMBER
+================================================== */
+
+let currentMember = 0;
+
+
+/* ==================================================
+   OPEN MEMBER
+================================================== */
+
+function openMember(id) {
+
+    const index =
+        members.findIndex(
+            member =>
+                member.id === id
+        );
+
+
+    if (index === -1) {
+        return;
+    }
+
+
+    currentMember =
+        index;
+
+
+    renderMember();
+
+
+    const story =
+        document.getElementById(
+            "memberStory"
+        );
+
+
+    story.classList.add(
+        "active"
+    );
+
+
+    setTimeout(
+        () => {
+
+            story.scrollIntoView({
+
+                behavior:
+                    "smooth",
+
+                block:
+                    "start"
+
+            });
+
+        },
+
+        50
+    );
+
+}
+
+
+/* ==================================================
+   RENDER MEMBER
+================================================== */
+
+function renderMember() {
+
+    const member =
+        members[currentMember];
+
+
+    const story =
+        document.getElementById(
+            "memberStory"
+        );
+
+
+    story.style.setProperty(
+        "--accent",
+        member.color
+    );
+
+
+    document.getElementById(
+        "storyImage"
+    ).src =
+        member.image;
+
+
+    document.getElementById(
+        "storyImage"
+    ).alt =
+        member.name;
+
+
+    document.getElementById(
+        "storyNumber"
+    ).textContent =
+        member.number;
+
+
+    document.getElementById(
+        "storyName"
+    ).textContent =
+        member.name;
+
+
+    document.getElementById(
+        "storyRealName"
+    ).textContent =
+        member.realName;
+
+
+    document.getElementById(
+        "storyPosition"
+    ).textContent =
+        member.position;
+
+
+    document.getElementById(
+        "storyTitle"
+    ).textContent =
+        member.title;
+
+
+    document.getElementById(
+        "storyQuote"
+    ).textContent =
+        "“" +
+        member.quote +
+        "”";
+
+
+    const journey =
+        document.getElementById(
+            "journeyContent"
+        );
+
+
+    journey.innerHTML = "";
+
+
+    member.journey.forEach(
+        item => {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+            div.className =
+                "journey-item";
+
+            div.textContent =
+                item;
+
+            journey.appendChild(
+                div
+            );
+
+        }
+    );
+
+
+    /* RESTART ANIMATION */
+
+    story.classList.remove(
+        "active"
+    );
+
+    void story.offsetWidth;
+
+    story.classList.add(
+        "active"
+    );
+
+}
+
+
+/* ==================================================
+   PREVIOUS MEMBER
+================================================== */
+
+function previousMember() {
+
+    currentMember--;
+
+    if (
+        currentMember < 0
+    ) {
+
+        currentMember =
+            members.length - 1;
+
+    }
+
+
+    renderMember();
+
+
+    document.getElementById(
+        "memberStory"
+    ).scrollIntoView({
+
+        behavior:
+            "smooth",
+
+        block:
+            "start"
+
+    });
+
+}
+
+
+/* ==================================================
+   NEXT MEMBER
+================================================== */
+
+function nextMember() {
+
+    currentMember++;
+
+    if (
+        currentMember >=
+        members.length
+    ) {
+
+        currentMember = 0;
+
+    }
+
+
+    renderMember();
+
+
+    document.getElementById(
+        "memberStory"
+    ).scrollIntoView({
+
+        behavior:
+            "smooth",
+
+        block:
+            "start"
+
+    });
+
+}
+
+
+/* ==================================================
+   CLOSE STORY
+================================================== */
+
+function closeMember() {
+
+    const story =
+        document.getElementById(
+            "memberStory"
+        );
+
+
+    story.classList.remove(
+        "active"
+    );
+
+
+    document.getElementById(
+        "members"
+    ).scrollIntoView({
+
+        behavior:
+            "smooth",
+
+        block:
+            "start"
+
+    });
+
+}
+
+
+/* ==================================================
+   KEYBOARD CONTROLS
+================================================== */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        const story =
+            document.getElementById(
+                "memberStory"
+            );
+
+
+        if (
+            mobileMenu.classList.contains(
+                "active"
+            ) &&
+            event.key === "Escape"
+        ) {
+
+            closeMenu();
+
+            return;
+
+        }
+
+
+        if (
+            !story.classList.contains(
+                "active"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            event.key ===
+            "ArrowRight"
+        ) {
+
+            nextMember();
+
+        }
+
+
+        if (
+            event.key ===
+            "ArrowLeft"
+        ) {
+
+            previousMember();
+
+        }
+
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            closeMember();
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   RESIZE
+================================================== */
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        if (
+            window.innerWidth >
+            700
+        ) {
+
+            closeMenu();
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+</html>

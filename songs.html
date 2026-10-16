@@ -1,0 +1,3246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>Songs | RAVENIX</title>
+
+<style>
+
+/* ==================================================
+   RESET
+================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #050505;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+::selection {
+    background: white;
+    color: black;
+}
+
+
+/* ==================================================
+   NAVIGATION
+================================================== */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    padding: 0 6%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    z-index: 5000;
+
+    background: rgba(5,5,5,.60);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 7px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+}
+
+.nav-links a {
+    position: relative;
+    color: #999;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    transition: .3s;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -9px;
+    width: 0;
+    height: 1px;
+    background: white;
+    transition: .3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: white;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+
+/* ==================================================
+   MOBILE MENU
+================================================== */
+
+.menu-button {
+    display: none;
+    position: relative;
+    width: 42px;
+    height: 42px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 5002;
+}
+
+.menu-button span {
+    position: absolute;
+    left: 8px;
+    width: 26px;
+    height: 1px;
+    background: white;
+    transition: .35s;
+}
+
+.menu-button span:nth-child(1) {
+    top: 14px;
+}
+
+.menu-button span:nth-child(2) {
+    top: 21px;
+}
+
+.menu-button span:nth-child(3) {
+    top: 28px;
+}
+
+.menu-button.active span:nth-child(1) {
+    top: 21px;
+    transform: rotate(45deg);
+}
+
+.menu-button.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-button.active span:nth-child(3) {
+    top: 21px;
+    transform: rotate(-45deg);
+}
+
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    height: 100dvh;
+    z-index: 4999;
+
+    background: rgba(3,3,3,.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-15px);
+
+    transition: .35s;
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.mobile-menu-small {
+    color: #555;
+    font-size: 8px;
+    letter-spacing: 6px;
+    margin-bottom: 35px;
+}
+
+.mobile-menu a {
+    margin: 10px;
+    color: white;
+    font-size: clamp(28px,9vw,42px);
+    letter-spacing: 5px;
+}
+
+.mobile-menu-bottom {
+    position: absolute;
+    bottom: 35px;
+    color: #444;
+    font-size: 8px;
+    letter-spacing: 4px;
+}
+
+
+/* ==================================================
+   HERO
+================================================== */
+
+.hero {
+    position: relative;
+    min-height: 82svh;
+    padding: 160px 7% 90px;
+
+    display: flex;
+    align-items: flex-end;
+
+    overflow: hidden;
+    isolation: isolate;
+
+    background: #050505;
+}
+
+.hero-photo {
+    position: absolute;
+    inset: -35px;
+    z-index: -5;
+
+    background-image: url("ravenix-bg.png");
+    background-size: cover;
+    background-position: center 28%;
+
+    filter:
+        blur(11px)
+        brightness(.32)
+        saturate(.65);
+
+    transform: scale(1.10);
+
+    animation:
+        groupMove 14s ease-in-out infinite alternate;
+}
+
+.hero-darkness {
+    position: absolute;
+    inset: 0;
+    z-index: -4;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5,5,5,.82),
+            rgba(5,5,5,.48),
+            rgba(5,5,5,.72)
+        ),
+        linear-gradient(
+            180deg,
+            rgba(5,5,5,.22),
+            rgba(5,5,5,.42) 55%,
+            #050505
+        );
+}
+
+.hero-glow {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    right: -200px;
+    top: -250px;
+    z-index: -3;
+
+    border-radius: 50%;
+    background: rgba(255,255,255,.035);
+    filter: blur(100px);
+
+    animation:
+        heroGlow 8s ease-in-out infinite alternate;
+}
+
+.hero-grain {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    opacity: .07;
+    pointer-events: none;
+
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.025) 0,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+}
+
+.hero-letter {
+    position: absolute;
+    right: -1%;
+    top: 2%;
+    z-index: -1;
+
+    color: transparent;
+    font-size: clamp(330px,46vw,720px);
+    font-weight: bold;
+    line-height: 1;
+
+    -webkit-text-stroke:
+        1px rgba(255,255,255,.06);
+
+    pointer-events: none;
+}
+
+@keyframes groupMove {
+
+    from {
+        transform:
+            scale(1.10)
+            translateX(-8px);
+    }
+
+    to {
+        transform:
+            scale(1.14)
+            translateX(8px);
+    }
+}
+
+@keyframes heroGlow {
+
+    from {
+        transform: scale(.9);
+    }
+
+    to {
+        transform: scale(1.15);
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.hero-small {
+    color: rgba(255,255,255,.55);
+    font-size: 9px;
+    letter-spacing: 7px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(75px,14vw,190px);
+    line-height: .8;
+    letter-spacing: 4px;
+
+    text-shadow:
+        0 5px 35px rgba(0,0,0,.9);
+}
+
+.hero-bottom {
+    margin-top: 45px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.hero-line {
+    width: 80px;
+    height: 1px;
+    background: rgba(255,255,255,.5);
+}
+
+.hero-bottom p {
+    color: #aaa;
+    font-size: 10px;
+    letter-spacing: 5px;
+    line-height: 1.8;
+}
+
+
+/* ==================================================
+   DISCOGRAPHY
+================================================== */
+
+.discography {
+    padding: 130px 7% 160px;
+    background: #050505;
+    border-top: 1px solid #151515;
+}
+
+.section-label {
+    color: #555;
+    font-size: 9px;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+.discography h2 {
+    font-size: clamp(50px,8vw,105px);
+    letter-spacing: 3px;
+}
+
+.discography-intro {
+    margin-top: 25px;
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 4px;
+}
+
+
+/* ==================================================
+   SONG GRID
+================================================== */
+
+.song-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 28px;
+    margin-top: 75px;
+}
+
+.song-card {
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cover-wrap {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: #111;
+    border: 1px solid #1b1b1b;
+}
+
+.cover-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+
+    transition:
+        transform .7s,
+        filter .7s;
+}
+
+.cover-wrap::after {
+    content: "OPEN SONG";
+
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    font-size: 9px;
+    letter-spacing: 5px;
+
+    background: rgba(0,0,0,.65);
+
+    opacity: 0;
+    transition: .4s;
+    pointer-events: none;
+}
+
+.song-card:hover .cover-wrap img {
+    transform: scale(1.06);
+    filter: brightness(.65);
+}
+
+.song-card:hover .cover-wrap::after {
+    opacity: 1;
+}
+
+.song-card-info {
+    padding-top: 22px;
+}
+
+.song-number {
+    color: #555;
+    font-size: 8px;
+    letter-spacing: 4px;
+}
+
+.song-card h3 {
+    margin-top: 10px;
+    font-size: clamp(22px,2.5vw,34px);
+    letter-spacing: 2px;
+}
+
+.song-card p {
+    margin-top: 8px;
+    color: #666;
+    font-size: 8px;
+    letter-spacing: 3px;
+}
+
+
+/* ==================================================
+   SONG DETAIL
+================================================== */
+
+.song-detail {
+    position: relative;
+    display: none;
+
+    min-height: 100vh;
+    padding: 130px 7% 150px;
+
+    overflow: hidden;
+
+    background: #050505;
+
+    border-top: 1px solid #171717;
+}
+
+.song-detail.active {
+    display: block;
+    animation: detailAppear .7s ease;
+}
+
+@keyframes detailAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.song-detail-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: auto;
+}
+
+.song-effect {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+
+/* ==================================================
+   UNDERDOGS EFFECT
+================================================== */
+
+#underdogs-detail .song-effect {
+    background:
+        linear-gradient(
+            110deg,
+            transparent 20%,
+            rgba(255,255,255,.045) 48%,
+            transparent 70%
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.018) 0,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px,
+            transparent 5px
+        );
+
+    background-size:
+        250% 100%,
+        100% 100%;
+
+    animation:
+        underdogsSweep 8s linear infinite;
+}
+
+@keyframes underdogsSweep {
+
+    from {
+        background-position:
+            150% 0,
+            0 0;
+    }
+
+    to {
+        background-position:
+            -150% 0,
+            0 0;
+    }
+}
+
+
+/* ==================================================
+   SILK & SMOKE EFFECT
+================================================== */
+
+#silk-smoke-detail .song-effect::before,
+#silk-smoke-detail .song-effect::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 800px;
+    height: 800px;
+
+    border-radius: 50%;
+
+    filter: blur(90px);
+
+    opacity: .13;
+}
+
+#silk-smoke-detail .song-effect::before {
+
+    left: -250px;
+    top: 10%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(220,220,220,.7),
+            transparent 65%
+        );
+
+    animation:
+        smokeOne 12s ease-in-out infinite alternate;
+}
+
+#silk-smoke-detail .song-effect::after {
+
+    right: -300px;
+    top: 40%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(150,150,150,.55),
+            transparent 65%
+        );
+
+    animation:
+        smokeTwo 15s ease-in-out infinite alternate;
+}
+
+@keyframes smokeOne {
+
+    from {
+        transform:
+            translate(-40px,30px)
+            scale(.8);
+    }
+
+    to {
+        transform:
+            translate(250px,-80px)
+            scale(1.25);
+    }
+}
+
+@keyframes smokeTwo {
+
+    from {
+        transform:
+            translate(30px,-30px)
+            scale(.9);
+    }
+
+    to {
+        transform:
+            translate(-260px,100px)
+            scale(1.3);
+    }
+}
+
+
+/* ==================================================
+   NIGHTBITE EFFECT
+================================================== */
+
+#nightbite-detail .song-effect {
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(120,0,0,.22),
+            transparent 48%
+        );
+
+    animation:
+        nightPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes nightPulse {
+
+    from {
+        opacity: .45;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(180,30,30,.7);
+
+    animation:
+        particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+
+    from {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .8;
+    }
+
+    85% {
+        opacity: .5;
+    }
+
+    to {
+        transform: translateY(-200px);
+        opacity: 0;
+    }
+}
+
+
+/* ==================================================
+   SONG HEADER
+================================================== */
+
+.back-button {
+    border: none;
+    background: transparent;
+    color: #777;
+    cursor: pointer;
+
+    font-size: 8px;
+    letter-spacing: 4px;
+
+    margin-bottom: 60px;
+
+    transition: .3s;
+}
+
+.back-button:hover {
+    color: white;
+}
+
+.song-header {
+    display: grid;
+
+    grid-template-columns:
+        minmax(280px,480px)
+        minmax(0,1fr);
+
+    gap: 80px;
+
+    align-items: center;
+}
+
+.song-cover-large {
+    aspect-ratio: 1;
+    overflow: hidden;
+
+    border:
+        1px solid rgba(255,255,255,.12);
+}
+
+.song-cover-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.song-meta-small {
+    color: #666;
+    font-size: 8px;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+.song-title-large {
+    font-size: clamp(55px,9vw,125px);
+    line-height: .9;
+    letter-spacing: 2px;
+}
+
+
+/* ==================================================
+   NOW PLAYING
+================================================== */
+
+.now-playing {
+    margin-top: 35px;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 12px 18px;
+
+    border: 1px solid #292929;
+
+    background:
+        rgba(10,10,10,.55);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    color: #aaa;
+
+    font-size: 8px;
+    letter-spacing: 3px;
+}
+
+.equalizer {
+    height: 15px;
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+}
+
+.equalizer span {
+    width: 2px;
+    background: white;
+
+    animation:
+        equalizer .8s ease-in-out infinite alternate;
+}
+
+.equalizer span:nth-child(1) {
+    height: 5px;
+}
+
+.equalizer span:nth-child(2) {
+    height: 13px;
+    animation-delay: .2s;
+}
+
+.equalizer span:nth-child(3) {
+    height: 8px;
+    animation-delay: .4s;
+}
+
+.equalizer span:nth-child(4) {
+    height: 11px;
+    animation-delay: .1s;
+}
+
+@keyframes equalizer {
+
+    from {
+        height: 3px;
+    }
+
+    to {
+        height: 15px;
+    }
+}
+
+
+/* ==================================================
+   LYRICS
+================================================== */
+
+.lyrics {
+    position: relative;
+
+    max-width: 850px;
+
+    margin: 120px auto 0;
+
+    padding: 65px;
+
+    overflow: hidden;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    background:
+        rgba(5,5,5,.68);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.lyrics-label {
+    color: #555;
+    font-size: 8px;
+    letter-spacing: 6px;
+    margin-bottom: 55px;
+}
+
+.lyric-section {
+    margin-bottom: 55px;
+}
+
+.lyric-section:last-child {
+    margin-bottom: 0;
+}
+
+.lyric-section h3 {
+    margin-bottom: 20px;
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 4px;
+}
+
+.lyric-section p {
+    color: #ddd;
+    font-size: 16px;
+    line-height: 2;
+    white-space: pre-line;
+}
+
+
+/* ==================================================
+   CREDITS
+================================================== */
+
+.song-credits {
+    max-width: 850px;
+
+    margin: 45px auto 0;
+
+    padding: 45px 0;
+
+    border-top: 1px solid #292929;
+    border-bottom: 1px solid #292929;
+}
+
+.credits-top {
+    margin-bottom: 35px;
+    color: #555;
+    font-size: 8px;
+    letter-spacing: 6px;
+}
+
+.credit-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    padding: 19px 0;
+
+    border-bottom:
+        1px solid #161616;
+}
+
+.credit-row span {
+    color: #555;
+    font-size: 8px;
+    letter-spacing: 3px;
+}
+
+.credit-row strong {
+    color: #bbb;
+
+    font-size: 9px;
+    font-weight: 500;
+
+    letter-spacing: 2px;
+
+    text-align: right;
+}
+
+.copyright-line {
+    margin-top: 40px;
+    padding-top: 25px;
+
+    border-top:
+        1px solid #1c1c1c;
+
+    color: #444;
+
+    font-size: 8px;
+    letter-spacing: 2px;
+    line-height: 1.9;
+}
+
+
+/* ==================================================
+   FOOTER
+================================================== */
+
+footer {
+    padding: 40px 7%;
+
+    display: flex;
+    justify-content: space-between;
+
+    color: #555;
+
+    font-size: 8px;
+    letter-spacing: 3px;
+
+    border-top: 1px solid #171717;
+
+    background: #050505;
+}
+
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media(max-width:1000px) {
+
+    .song-grid {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .song-card:last-child {
+        grid-column: 1 / 3;
+        width: 50%;
+        justify-self: center;
+    }
+
+    .song-header {
+        gap: 45px;
+
+        grid-template-columns:
+            minmax(260px,380px)
+            minmax(0,1fr);
+    }
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media(max-width:700px) {
+
+    nav {
+        height: 65px;
+        padding: 0 18px;
+    }
+
+    .logo {
+        font-size: 16px;
+        letter-spacing: 5px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .hero {
+        min-height: 650px;
+
+        padding:
+            130px 20px
+            70px;
+    }
+
+    .hero-photo {
+        inset: -25px;
+
+        background-position:
+            center top;
+
+        filter:
+            blur(15px)
+            brightness(.25)
+            saturate(.55);
+
+        transform:
+            scale(1.14);
+    }
+
+    .hero-letter {
+        top: 100px;
+        right: -70px;
+        font-size: 390px;
+    }
+
+    .hero-small {
+        font-size: 7px;
+        letter-spacing: 5px;
+    }
+
+    .hero h1 {
+        font-size:
+            clamp(60px,21vw,95px);
+    }
+
+    .hero-bottom {
+        display: block;
+        margin-top: 35px;
+    }
+
+    .hero-line {
+        margin-bottom: 25px;
+    }
+
+    .hero-bottom p {
+        font-size: 8px;
+        letter-spacing: 3px;
+    }
+
+    .discography {
+        padding:
+            90px 20px
+            110px;
+    }
+
+    .discography h2 {
+        font-size: 50px;
+    }
+
+    .discography-intro {
+        line-height: 1.8;
+    }
+
+    .song-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        margin-top: 55px;
+    }
+
+    .song-card:last-child {
+        grid-column: auto;
+        width: 100%;
+    }
+
+    .cover-wrap::after {
+        display: none;
+    }
+
+    .song-detail {
+        padding:
+            90px 20px
+            110px;
+    }
+
+    .back-button {
+        margin-bottom: 40px;
+    }
+
+    .song-header {
+        display: block;
+    }
+
+    .song-cover-large {
+        width: 100%;
+        margin-bottom: 45px;
+    }
+
+    /*
+       MOBILE TITLE FIX
+
+       UNDERDOGS now fits inside
+       the phone screen.
+    */
+
+    .song-title-large {
+        font-size:
+            clamp(34px,10.5vw,58px);
+
+        line-height: .95;
+
+        letter-spacing: 0;
+
+        max-width: 100%;
+
+        white-space: nowrap;
+    }
+
+    .now-playing {
+        font-size: 7px;
+        letter-spacing: 2px;
+    }
+
+    .lyrics {
+        margin-top: 80px;
+
+        padding:
+            40px 25px;
+    }
+
+    .lyrics-label {
+        margin-bottom: 40px;
+    }
+
+    .lyric-section {
+        margin-bottom: 45px;
+    }
+
+    .lyric-section p {
+        font-size: 15px;
+        line-height: 1.9;
+    }
+
+    .song-credits {
+        margin-top: 35px;
+        padding: 35px 0;
+    }
+
+    .credit-row {
+        display: block;
+        padding: 18px 0;
+    }
+
+    .credit-row span {
+        display: block;
+        margin-bottom: 9px;
+    }
+
+    .credit-row strong {
+        display: block;
+        text-align: left;
+        line-height: 1.6;
+    }
+
+    #silk-smoke-detail
+    .song-effect::before,
+
+    #silk-smoke-detail
+    .song-effect::after {
+        opacity: .07;
+    }
+
+    footer {
+        display: block;
+        text-align: center;
+        line-height: 2.2;
+    }
+
+    footer span {
+        display: block;
+    }
+}
+
+
+/* ==================================================
+   SMALL PHONE
+================================================== */
+
+@media(max-width:400px) {
+
+    .song-title-large {
+        font-size: 10vw;
+        letter-spacing: 0;
+        white-space: nowrap;
+    }
+}
+
+@media(max-width:360px) {
+
+    .hero h1 {
+        font-size: 56px;
+    }
+
+    .discography h2 {
+        font-size: 42px;
+    }
+
+    .song-title-large {
+        font-size: 9.7vw;
+        letter-spacing: 0;
+        white-space: nowrap;
+    }
+}
+
+
+/* ==================================================
+   REDUCED MOTION
+================================================== */
+
+@media(prefers-reduced-motion:reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration:
+            .01ms !important;
+
+        transition-duration:
+            .01ms !important;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVIGATION -->
+
+<nav>
+
+<a href="home.html" class="logo">
+RAVENIX
+</a>
+
+<div class="nav-links">
+
+<a href="home.html">
+HOME
+</a>
+
+<a href="home.html#members">
+MEMBERS
+</a>
+
+<a href="songs.html" class="active">
+SONGS
+</a>
+
+<a href="about.html">
+ABOUT
+</a>
+
+<a href="contact.html">
+CONTACT
+</a>
+
+</div>
+
+
+<button
+    class="menu-button"
+    id="menuButton"
+    onclick="toggleMenu()"
+    aria-label="Open menu"
+>
+
+<span></span>
+<span></span>
+<span></span>
+
+</button>
+
+</nav>
+
+
+<!-- MOBILE MENU -->
+
+<div
+    class="mobile-menu"
+    id="mobileMenu"
+>
+
+<div class="mobile-menu-small">
+RAVENIX OFFICIAL
+</div>
+
+<a href="home.html">
+HOME
+</a>
+
+<a href="home.html#members">
+MEMBERS
+</a>
+
+<a href="songs.html">
+SONGS
+</a>
+
+<a href="about.html">
+ABOUT
+</a>
+
+<a href="contact.html">
+CONTACT
+</a>
+
+<div class="mobile-menu-bottom">
+FIVE SHADOWS • ONE LEGACY
+</div>
+
+</div>
+
+
+<!-- HERO -->
+
+<section
+    class="hero"
+    id="musicHero"
+>
+
+<div class="hero-photo"></div>
+<div class="hero-darkness"></div>
+<div class="hero-glow"></div>
+<div class="hero-grain"></div>
+
+<div class="hero-letter">
+R
+</div>
+
+<div class="hero-content">
+
+<div class="hero-small">
+RAVENIX / DISCOGRAPHY
+</div>
+
+<h1>
+MUSIC
+</h1>
+
+<div class="hero-bottom">
+
+<div class="hero-line"></div>
+
+<p>
+THREE SONGS • FIVE VOICES • ONE SOUND
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- DISCOGRAPHY -->
+
+<section
+    class="discography"
+    id="discography"
+>
+
+<div class="section-label">
+01 / DISCOGRAPHY
+</div>
+
+<h2>
+THE SONGS
+</h2>
+
+<p class="discography-intro">
+SELECT A SONG TO ENTER ITS WORLD.
+</p>
+
+
+<div class="song-grid">
+
+
+<!-- UNDERDOGS -->
+
+<article
+    class="song-card"
+    data-song="underdogs"
+    role="button"
+    tabindex="0"
+>
+
+<div class="cover-wrap">
+
+<img
+    src="underdogs.png"
+    alt="UNDERDOGS"
+>
+
+</div>
+
+<div class="song-card-info">
+
+<div class="song-number">
+01
+</div>
+
+<h3>
+UNDERDOGS
+</h3>
+
+<p>
+RAVENIX
+</p>
+
+</div>
+
+</article>
+
+
+<!-- SILK & SMOKE -->
+
+<article
+    class="song-card"
+    data-song="silk-smoke"
+    role="button"
+    tabindex="0"
+>
+
+<div class="cover-wrap">
+
+<img
+    src="silk-smoke.png"
+    alt="SILK & SMOKE"
+>
+
+</div>
+
+<div class="song-card-info">
+
+<div class="song-number">
+02
+</div>
+
+<h3>
+SILK &amp; SMOKE
+</h3>
+
+<p>
+RAVENIX
+</p>
+
+</div>
+
+</article>
+
+
+<!-- NIGHTBITE -->
+
+<article
+    class="song-card"
+    data-song="nightbite"
+    role="button"
+    tabindex="0"
+>
+
+<div class="cover-wrap">
+
+<img
+    src="nightbite.png"
+    alt="NIGHTBITE"
+>
+
+</div>
+
+<div class="song-card-info">
+
+<div class="song-number">
+03
+</div>
+
+<h3>
+NIGHTBITE
+</h3>
+
+<p>
+RAVENIX
+</p>
+
+</div>
+
+</article>
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     UNDERDOGS
+================================================== -->
+
+<section
+    class="song-detail"
+    id="underdogs-detail"
+>
+
+<div class="song-effect"></div>
+
+<div class="song-detail-content">
+
+<button
+    class="back-button"
+    onclick="backToSongs()"
+>
+← BACK TO DISCOGRAPHY
+</button>
+
+
+<div class="song-header">
+
+<div class="song-cover-large">
+
+<img
+    src="underdogs.png"
+    alt="UNDERDOGS"
+>
+
+</div>
+
+<div>
+
+<div class="song-meta-small">
+RAVENIX / SONG 01
+</div>
+
+<h2 class="song-title-large">
+UNDERDOGS
+</h2>
+
+<div class="now-playing">
+
+<div class="equalizer">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+NOW PLAYING • UNDERDOGS
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="lyrics">
+
+<div class="lyrics-label">
+OFFICIAL LYRICS
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[INTRO — WHISPER]</h3>
+
+<p>ZAYN:
+Stay low
+
+KAEL:
+stay sharp.
+
+ELIOR:
+Stay low
+
+KAEL:
+Ravenix
+
+ZAYN:
+moving silent.
+
+(beat drop)</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[VERSE 1 — NOX]</h3>
+
+<p>No name, no face, still run the scene
+All black moves, yeah we stay unseen
+You chase lights, I control the grid
+Every step planned, every move we did
+
+ZAYN:
+Cold mind, no need to speak
+Power silent, that’s what you seek
+You play loud, that’s your flaw
+We move once… break every law</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[VERSE 2]</h3>
+
+<p>KAEL:
+Built from dust, now we own the ground
+No throne claimed, still we wear the crown
+No trust here, cut ties quick
+If you switch sides, you don’t exist
+
+ZAYN:
+No fear, no second take
+One clean move, that’s all it takes
+Stay low-key, that’s how we win
+You want war? We end it within</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[PRE-CHORUS — ELIOR]</h3>
+
+<p>You don’t hear us in the night…
+But we’re already inside…</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[CHORUS]</h3>
+
+<p>RAYDEN + ZAYN:
+We the underdogs, move in silence
+Ravenix don’t move for guidance
+No spotlight, still bring violence
+We decide… we define it
+
+NOX + RAYDEN:
+We don’t chase, we replace
+Leave no proof, leave no trace
+From the dark, we rise above
+Ravenix… built from none</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[VERSE 3 — KAEL]</h3>
+
+<p>No leaks, no trace, clean exit
+Ravenix code — don’t forget it
+Play smart, not loud, that’s basics
+We don’t lose — we erase it
+No heart shown, that’s control
+Too much trust? You lose your role
+Every move like chess, precise
+Say “Ravenix”… pay the price</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[BRIDGE]</h3>
+
+<p>ELIOR:
+You thought we’d fall…
+
+ZAYN:
+Ravenix don’t break.
+
+NOX:
+Ohhhh</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[FINAL CHORUS]</h3>
+
+<p>RAYDEN:
+We the underdogs, silent kings
+Ravenix pulling all the strings
+No crown, no name, no light
+Still we own the night
+
+RAYDEN + ELIOR:
+From the bottom, now we decide
+No mercy left inside
+Underdogs… now you see
+Ravenix move invisibly.</p>
+
+</div>
+
+</div>
+
+
+<div class="song-credits">
+
+<div class="credits-top">
+SONG CREDITS
+</div>
+
+<div class="credit-row">
+<span>PERFORMED BY</span>
+<strong>RAVENIX</strong>
+</div>
+
+<div class="credit-row">
+<span>LYRICS BY</span>
+<strong>YOON SEOJIN · MIRA HAN</strong>
+</div>
+
+<div class="credit-row">
+<span>PRODUCED BY</span>
+<strong>KAEL · TAKSHA</strong>
+</div>
+
+<div class="credit-row">
+<span>CONCEPT BY</span>
+<strong>TAKSHA</strong>
+</div>
+
+<div class="credit-row">
+<span>LABEL</span>
+<strong>SILENT VEIL ENTERTAINMENT</strong>
+</div>
+
+<div class="copyright-line">
+© 2026 SILENT VEIL ENTERTAINMENT.
+ALL RIGHTS RESERVED.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     SILK & SMOKE
+================================================== -->
+
+<section
+    class="song-detail"
+    id="silk-smoke-detail"
+>
+
+<div class="song-effect"></div>
+
+<div class="song-detail-content">
+
+<button
+    class="back-button"
+    onclick="backToSongs()"
+>
+← BACK TO DISCOGRAPHY
+</button>
+
+
+<div class="song-header">
+
+<div class="song-cover-large">
+
+<img
+    src="silk-smoke.png"
+    alt="SILK & SMOKE"
+>
+
+</div>
+
+<div>
+
+<div class="song-meta-small">
+RAVENIX / SONG 02
+</div>
+
+<h2 class="song-title-large">
+SILK &amp; SMOKE
+</h2>
+
+<div class="now-playing">
+
+<div class="equalizer">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+NOW PLAYING • SILK &amp; SMOKE
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="lyrics">
+
+<div class="lyrics-label">
+OFFICIAL LYRICS
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[INTRO — WHISPER / FRAGILE]</h3>
+
+<p>ELIOR:
+You already crossed the line.
+Then why are you show…
+…if you’re afraid to fall?</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[VERSE 1 — KAEL]</h3>
+
+<p>Velvet silence, tension in your eyes
+Say nothing, but you don’t deny
+Every move feels too precise
+Like we’re dancing on thin lines
+Fingertips don’t even touch
+Still you feel it way too much
+You pull back, then lose control
+Like you’re scared of letting go</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[CHORUS — RAYDEN]</h3>
+
+<p>Silk and smoke… we intertwine
+Every truth turns into lies
+Hold your breath… don’t let it show
+How deep you’re letting go
+Silk and smoke… soft collapse
+No way forward, no way back
+If this breaks… we let it fall
+We were never safe at all
+
+ELIOR:
+Ohhhh</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[VERSE 2 — ZAYN]</h3>
+
+<p>No mistakes… just perfect lies
+Every truth you try to hide
+You say “stop”… but stay the same
+Caught inside a quiet flame
+No escape when it gets this close
+You don’t leave… you just get lost
+One more step and it unfolds
+What we are… you already know</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[CHORUS — RAYDEN + NOX]</h3>
+
+<p>Silk and smoke… we intertwine
+Every truth turns into lies
+Say you won’t… but stay the same
+Calling out my name again
+Silk and smoke… drifting slow
+Hearts don’t speak, but bodies know
+If this ends… we lose it all
+Still you choose to let it fall</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[BRIDGE]</h3>
+
+<p>NOX:
+We were never meant to stay…
+
+ELIOR:
+But you never walked away…
+
+NOX:
+Every second pulls you deeper…
+Every silence says my name…</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[FINAL CHORUS]</h3>
+
+<p>RAYDEN + NOX:
+Silk and smoke… we can’t rewind
+Every touch rewrites the line
+No more truth we can defend
+We’re too far to pretend
+Silk and smoke… let it break
+Every risk we chose to take
+If we fall… we fall as one
+Already too far gone</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[OUTRO]</h3>
+
+<p>ELIOR:
+…You knew this wouldn’t last…
+…but you stayed anyway.</p>
+
+</div>
+
+</div>
+
+
+<div class="song-credits">
+
+<div class="credits-top">
+SONG CREDITS
+</div>
+
+<div class="credit-row">
+<span>PERFORMED BY</span>
+<strong>RAVENIX</strong>
+</div>
+
+<div class="credit-row">
+<span>LYRICS BY</span>
+<strong>YOON SEOJIN · MIRA HAN</strong>
+</div>
+
+<div class="credit-row">
+<span>PRODUCED BY</span>
+<strong>KAEL · TAKSHA</strong>
+</div>
+
+<div class="credit-row">
+<span>CONCEPT BY</span>
+<strong>TAKSHA</strong>
+</div>
+
+<div class="credit-row">
+<span>LABEL</span>
+<strong>SILENT VEIL ENTERTAINMENT</strong>
+</div>
+
+<div class="copyright-line">
+© 2026 SILENT VEIL ENTERTAINMENT.
+ALL RIGHTS RESERVED.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     NIGHTBITE
+================================================== -->
+
+<section
+    class="song-detail"
+    id="nightbite-detail"
+>
+
+<div class="song-effect">
+
+<div
+    class="particles"
+    id="particles"
+></div>
+
+</div>
+
+<div class="song-detail-content">
+
+<button
+    class="back-button"
+    onclick="backToSongs()"
+>
+← BACK TO DISCOGRAPHY
+</button>
+
+
+<div class="song-header">
+
+<div class="song-cover-large">
+
+<img
+    src="nightbite.png"
+    alt="NIGHTBITE"
+>
+
+</div>
+
+<div>
+
+<div class="song-meta-small">
+RAVENIX / SONG 03
+</div>
+
+<h2 class="song-title-large">
+NIGHTBITE
+</h2>
+
+<div class="now-playing">
+
+<div class="equalizer">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+NOW PLAYING • NIGHTBITE
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="lyrics">
+
+<div class="lyrics-label">
+OFFICIAL LYRICS
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[INTRO — NOX]</h3>
+
+<p>Midnight calling, I can hear it breathe
+One little taste and you won’t wanna leave
+Don’t turn around, don’t step into the light
+Welcome to the night—
+Nightbite.</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[VERSE 1]</h3>
+
+<p>KAEL:
+Black boots, black fit, walk in like a warning
+Whole room freeze when the bass starts roaring
+No rules on me, I don’t need permission
+Eyes on the target, locked on the mission
+
+ZAYN:
+Red light dripping on the side of my face
+Come a little closer, let me ruin your pace
+Heartbeat racing when I enter your sight
+You knew it was dangerous—
+Still came tonight</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[PRE-CHORUS]</h3>
+
+<p>NOX:
+Cold hands, warm blood
+Something waking up
+Moon high, eyes locked
+Tell me when to stop
+
+KAEL:
+You can run until the morning
+But the dark already knows your name
+Every shadow gives a warning
+Still you’re walking into—</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[CHORUS]</h3>
+
+<p>ALL:
+NIGHTBITE!
+
+RAYDEN:
+Feel it when the bass goes doom-da-da-dum
+
+ALL:
+NIGHTBITE!
+
+RAYDEN:
+One touch and your heartbeat comes undone
+Red moon, black sky
+No sleep tonight
+Cross that line, you’re entering my side
+
+ALL:
+NIGHTBITE!
+Da-da-dum, da-da-dum
+
+ELIOR:
+That’s the night coming alive
+
+ALL:
+NIGHTBITE!
+Da-da-dum, da-da-dum
+
+ELIOR:
+That’s the night coming alive</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[POST-CHORUS]</h3>
+
+<p>ALL:
+Bite, bite
+
+ELIOR:
+Welcome to the midnight
+
+ALL:
+Bite, bite
+
+ELIOR:
+Better keep your eyes wide
+
+ALL:
+Bite, bite
+
+ELIOR:
+Welcome to the midnight
+
+ALL:
+Bite, bite
+
+ELIOR:
+Better keep your eyes wide
+
+ALL:
+Doom—da-da-doom—da-da-doom
+Doom—da-da-doom—</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[VERSE 2]</h3>
+
+<p>ZAYN:
+Redline, no brakes, I’m cutting through the haze
+Pretty little danger with a smile on my face
+Say you don’t want it, but you’re watching me move
+One step, two step—
+Now you’re caught in the groove
+
+KAEL:
+Tick-tock, midnight, better watch your back
+808 shake when I step on the track
+No halo, no saint, no chains on me
+Five shadows moving like a dynasty
+Turn up the engine, let the whole thing shake
+Too late now if you made that mistake
+R-A-V-E-N-I-X
+Put the night on fire when we enter the mix</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[PRE-CHORUS — ELIOR]</h3>
+
+<p>Slow down
+Don’t make a sound
+Feel that rhythm underneath the ground
+Cold hands, warm blood
+Now you’ve had enough
+But when the morning comes—
+You’ll still crave the rush</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[CHORUS]</h3>
+
+<p>ALL:
+NIGHTBITE!
+
+RAYDEN:
+Feel it when the bass goes doom-da-da-dum
+
+ALL:
+NIGHTBITE!
+
+RAYDEN:
+One touch and your heartbeat comes undone
+Red moon, black sky
+No sleep tonight
+Cross that line, you’re entering my side
+
+ALL:
+NIGHTBITE!
+Da-da-dum, da-da-dum
+
+ELIOR:
+That’s the night coming alive</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[DANCE BREAK — ELIOR CENTER]</h3>
+
+<p>ELIOR:
+Bite—bite—bite—bite
+Night—night—night—night
+
+KAEL:
+Turn the bass up.
+DOOM—DOOM—KA—DOOM
+DA-DA-DOOM—KA—DOOM
+Turn the bass up.
+DOOM—DOOM—KA—DOOM
+DA-DA-DOOM—KA—DOOM
+
+ZAYN:
+Left, right
+Move underneath the red light
+(No light) No light
+We belong to the midnight</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[BRIDGE — NOX]</h3>
+
+<p>When everything goes silent
+And the moon begins to fade
+Would you still come find me
+If you knew what darkness made?
+I can hear your heartbeat
+Even miles away
+So if this night is ending—
+Give me one more taste
+
+One more taste…</p>
+
+</div>
+
+
+<div class="lyric-section">
+
+<h3>[FINAL CHORUS]</h3>
+
+<p>RAYDEN:
+Feel it when the bass goes doom-da-da-dum
+
+ALL:
+NIGHTBITE!
+
+RAYDEN:
+Let it take your heartbeat one by one
+Red moon, black sky
+We’re born tonight
+Five shadows dancing underneath the lights
+
+ALL:
+NIGHTBITE!
+Da-da-dum, da-da-dum
+
+RAYDEN:
+Ahhhhhh
+
+ALL:
+Da-da-dum, da-da-dum
+
+RAYDEN:
+Let the whole damn city come alive!
+
+ZAYN:
+COME ALIIIIIVE—!
+
+ALL:
+Da-da-dum, da-da-dum
+NIGHTBITE!
+Da-da-dum, da-da-dum
+NIGHTBITE!
+
+ZAYN:
+Bite, bite
+Welcome to the midnight
+Bite, bite
+RAVENIX owns the night
+
+RAYDEN:
+You thought sunrise would save you?
+
+ZAYN:
+Nightbite!</p>
+
+</div>
+
+</div>
+
+
+<div class="song-credits">
+
+<div class="credits-top">
+SONG CREDITS
+</div>
+
+<div class="credit-row">
+<span>PERFORMED BY</span>
+<strong>RAVENIX</strong>
+</div>
+
+<div class="credit-row">
+<span>LYRICS BY</span>
+<strong>YOON SEOJIN · MIRA HAN</strong>
+</div>
+
+<div class="credit-row">
+<span>PRODUCED BY</span>
+<strong>KAEL · TAKSHA</strong>
+</div>
+
+<div class="credit-row">
+<span>CONCEPT BY</span>
+<strong>TAKSHA</strong>
+</div>
+
+<div class="credit-row">
+<span>LABEL</span>
+<strong>SILENT VEIL ENTERTAINMENT</strong>
+</div>
+
+<div class="copyright-line">
+© 2026 SILENT VEIL ENTERTAINMENT.
+ALL RIGHTS RESERVED.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     HIDDEN AUDIO
+================================================== -->
+
+<audio
+    id="audio-underdogs"
+    preload="auto"
+    playsinline
+    webkit-playsinline
+>
+<source
+    src="underdogs.mp3"
+    type="audio/mpeg"
+>
+</audio>
+
+
+<audio
+    id="audio-silk-smoke"
+    preload="auto"
+    playsinline
+    webkit-playsinline
+>
+<source
+    src="silk-smoke.mp3"
+    type="audio/mpeg"
+>
+</audio>
+
+
+<audio
+    id="audio-nightbite"
+    preload="auto"
+    playsinline
+    webkit-playsinline
+>
+<source
+    src="nightbite.mp3"
+    type="audio/mpeg"
+>
+</audio>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<span>
+© 2026 SILENT VEIL ENTERTAINMENT
+</span>
+
+<span>
+RAVENIX OFFICIAL WEBSITE
+</span>
+
+</footer>
+
+
+<script>
+
+/* ==================================================
+   ELEMENTS
+================================================== */
+
+const menuButton =
+    document.getElementById("menuButton");
+
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
+const hero =
+    document.getElementById("musicHero");
+
+const discography =
+    document.getElementById("discography");
+
+
+/* ==================================================
+   AUDIO
+================================================== */
+
+const audios = {
+
+    "underdogs":
+        document.getElementById(
+            "audio-underdogs"
+        ),
+
+    "silk-smoke":
+        document.getElementById(
+            "audio-silk-smoke"
+        ),
+
+    "nightbite":
+        document.getElementById(
+            "audio-nightbite"
+        )
+
+};
+
+let currentSong = null;
+
+
+/* ==================================================
+   PREPARE AUDIO
+================================================== */
+
+Object.values(audios)
+.forEach(function(audio) {
+
+    if (!audio) return;
+
+    audio.preload = "auto";
+
+    audio.setAttribute(
+        "playsinline",
+        ""
+    );
+
+    audio.setAttribute(
+        "webkit-playsinline",
+        ""
+    );
+
+});
+
+
+/* ==================================================
+   MOBILE MENU
+================================================== */
+
+function toggleMenu() {
+
+    const open =
+        mobileMenu.classList.toggle(
+            "active"
+        );
+
+    menuButton.classList.toggle(
+        "active",
+        open
+    );
+
+    document.body.classList.toggle(
+        "no-scroll",
+        open
+    );
+}
+
+
+function closeMenu() {
+
+    mobileMenu.classList.remove(
+        "active"
+    );
+
+    menuButton.classList.remove(
+        "active"
+    );
+
+    document.body.classList.remove(
+        "no-scroll"
+    );
+}
+
+
+/* ==================================================
+   STOP AUDIO
+================================================== */
+
+function stopAllAudio(
+    except = null
+) {
+
+    Object.entries(audios)
+    .forEach(
+        function([name,audio]) {
+
+            if (!audio) return;
+
+            if (name === except) {
+                return;
+            }
+
+            audio.pause();
+
+            try {
+                audio.currentTime = 0;
+            }
+            catch(error) {}
+
+        }
+    );
+}
+
+
+/* ==================================================
+   HIDE SONGS
+================================================== */
+
+function hideAllSongs() {
+
+    document
+    .querySelectorAll(
+        ".song-detail"
+    )
+    .forEach(
+        function(detail) {
+
+            detail.classList.remove(
+                "active"
+            );
+
+        }
+    );
+}
+
+
+/* ==================================================
+   SHOW SONG
+================================================== */
+
+function showSongPage(song) {
+
+    const detail =
+        document.getElementById(
+            song + "-detail"
+        );
+
+    if (!detail) return;
+
+
+    hideAllSongs();
+
+
+    hero.style.display =
+        "none";
+
+    discography.style.display =
+        "none";
+
+
+    detail.classList.add(
+        "active"
+    );
+
+
+    try {
+
+        history.replaceState(
+            null,
+            "",
+            "#" + song
+        );
+
+    }
+    catch(error) {}
+
+
+    window.scrollTo(
+        0,
+        0
+    );
+}
+
+
+/* ==================================================
+   PLAY SONG
+================================================== */
+
+function playSong(song) {
+
+    const audio =
+        audios[song];
+
+
+    if (!audio) {
+
+        showSongPage(song);
+
+        return;
+    }
+
+
+    currentSong = song;
+
+
+    /*
+       Stop all OTHER songs.
+    */
+
+    stopAllAudio(song);
+
+
+    /*
+       Make sure audio is audible.
+    */
+
+    audio.muted = false;
+    audio.volume = 1;
+
+
+    /*
+       Reset song.
+    */
+
+    try {
+
+        audio.currentTime = 0;
+
+    }
+    catch(error) {}
+
+
+    /*
+       Play immediately from user tap.
+    */
+
+    let playRequest;
+
+    try {
+
+        playRequest =
+            audio.play();
+
+    }
+    catch(error) {
+
+        console.log(
+            "Audio play error:",
+            error
+        );
+    }
+
+
+    /*
+       Open song page.
+    */
+
+    showSongPage(song);
+
+
+    if (
+        playRequest &&
+        typeof playRequest.catch ===
+        "function"
+    ) {
+
+        playRequest.catch(
+            function(error) {
+
+                console.log(
+                    "Playback blocked:",
+                    error
+                );
+
+            }
+        );
+    }
+}
+
+
+/* ==================================================
+   SONG CARD EVENTS
+================================================== */
+
+document
+.querySelectorAll(
+    ".song-card"
+)
+.forEach(
+    function(card) {
+
+        const song =
+            card.dataset.song;
+
+
+        card.addEventListener(
+            "pointerup",
+            function(event) {
+
+                event.preventDefault();
+
+                playSong(song);
+
+            }
+        );
+
+
+        card.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key ===
+                    "Enter" ||
+
+                    event.key ===
+                    " "
+                ) {
+
+                    event.preventDefault();
+
+                    playSong(song);
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* ==================================================
+   OLDER MOBILE FALLBACK
+================================================== */
+
+if (
+    !("PointerEvent" in window)
+) {
+
+    document
+    .querySelectorAll(
+        ".song-card"
+    )
+    .forEach(
+        function(card) {
+
+            const song =
+                card.dataset.song;
+
+
+            card.addEventListener(
+                "touchend",
+                function(event) {
+
+                    event.preventDefault();
+
+                    playSong(song);
+
+                },
+                {
+                    passive: false
+                }
+            );
+
+
+            card.addEventListener(
+                "click",
+                function(event) {
+
+                    event.preventDefault();
+
+                    playSong(song);
+
+                }
+            );
+
+        }
+    );
+}
+
+
+/* ==================================================
+   BACK
+================================================== */
+
+function backToSongs() {
+
+    stopAllAudio();
+
+    currentSong = null;
+
+    hideAllSongs();
+
+
+    hero.style.display =
+        "flex";
+
+    discography.style.display =
+        "block";
+
+
+    try {
+
+        history.replaceState(
+            null,
+            "",
+            window.location.pathname
+        );
+
+    }
+    catch(error) {}
+
+
+    window.scrollTo(
+        0,
+        0
+    );
+}
+
+
+/* ==================================================
+   DIRECT HASH
+================================================== */
+
+function checkHash() {
+
+    const song =
+        window.location.hash
+        .replace(
+            "#",
+            ""
+        );
+
+
+    const validSongs = [
+        "underdogs",
+        "silk-smoke",
+        "nightbite"
+    ];
+
+
+    if (
+        validSongs.includes(
+            song
+        )
+    ) {
+
+        /*
+           Show only.
+           Don't autoplay from direct link.
+        */
+
+        showSongPage(song);
+
+    }
+}
+
+
+/* ==================================================
+   NIGHTBITE PARTICLES
+================================================== */
+
+function createParticles() {
+
+    const container =
+        document.getElementById(
+            "particles"
+        );
+
+
+    if (!container) return;
+
+
+    for (
+        let i = 0;
+        i < 35;
+        i++
+    ) {
+
+        const particle =
+            document.createElement(
+                "span"
+            );
+
+
+        particle.className =
+            "particle";
+
+
+        particle.style.left =
+            (
+                Math.random() *
+                100
+            ) +
+            "%";
+
+
+        particle.style.top =
+            (
+                Math.random() *
+                100
+            ) +
+            "%";
+
+
+        particle.style.animationDuration =
+            (
+                8 +
+                Math.random() *
+                12
+            ) +
+            "s";
+
+
+        particle.style.animationDelay =
+            (
+                Math.random() *
+                -15
+            ) +
+            "s";
+
+
+        const size =
+            1 +
+            Math.random() *
+            3;
+
+
+        particle.style.width =
+            size +
+            "px";
+
+        particle.style.height =
+            size +
+            "px";
+
+
+        container.appendChild(
+            particle
+        );
+    }
+}
+
+
+/* ==================================================
+   ESCAPE
+================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key !==
+            "Escape"
+        ) return;
+
+
+        if (
+            mobileMenu
+            .classList
+            .contains(
+                "active"
+            )
+        ) {
+
+            closeMenu();
+
+            return;
+        }
+
+
+        const activeSong =
+            document.querySelector(
+                ".song-detail.active"
+            );
+
+
+        if (activeSong) {
+
+            backToSongs();
+
+        }
+    }
+);
+
+
+/* ==================================================
+   MOBILE LINKS
+================================================== */
+
+document
+.querySelectorAll(
+    ".mobile-menu a"
+)
+.forEach(
+    function(link) {
+
+        link.addEventListener(
+            "click",
+            closeMenu
+        );
+
+    }
+);
+
+
+/* ==================================================
+   RESIZE
+================================================== */
+
+window.addEventListener(
+    "resize",
+    function() {
+
+        if (
+            window.innerWidth >
+            700
+        ) {
+
+            closeMenu();
+
+        }
+    }
+);
+
+
+/* ==================================================
+   LEAVING PAGE
+================================================== */
+
+window.addEventListener(
+    "pagehide",
+    function() {
+
+        stopAllAudio();
+
+    }
+);
+
+
+/* ==================================================
+   START
+================================================== */
+
+createParticles();
+
+checkHash();
+
+</script>
+
+</body>
+</html>

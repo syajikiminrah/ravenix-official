@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>Contact | RAVENIX</title>
+
+<style>
+
+/* ==================================================
+   RESET
+================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #050505;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+::selection {
+    background: white;
+    color: black;
+}
+
+
+/* ==================================================
+   NAVIGATION
+================================================== */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 80px;
+
+    padding: 0 6%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    z-index: 5000;
+
+    background: rgba(5,5,5,.60);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 7px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+}
+
+.nav-links a {
+    position: relative;
+
+    color: #999;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 3px;
+
+    transition: .3s;
+}
+
+.nav-links a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -9px;
+
+    width: 0;
+    height: 1px;
+
+    background: white;
+
+    transition: .3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: white;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+
+/* ==================================================
+   MOBILE MENU BUTTON
+================================================== */
+
+.menu-button {
+    display: none;
+
+    position: relative;
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    z-index: 5002;
+}
+
+.menu-button span {
+    position: absolute;
+
+    left: 8px;
+
+    width: 26px;
+    height: 1px;
+
+    background: white;
+
+    transition: .35s;
+}
+
+.menu-button span:nth-child(1) {
+    top: 14px;
+}
+
+.menu-button span:nth-child(2) {
+    top: 21px;
+}
+
+.menu-button span:nth-child(3) {
+    top: 28px;
+}
+
+.menu-button.active span:nth-child(1) {
+    top: 21px;
+    transform: rotate(45deg);
+}
+
+.menu-button.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-button.active span:nth-child(3) {
+    top: 21px;
+    transform: rotate(-45deg);
+}
+
+
+/* ==================================================
+   MOBILE MENU
+================================================== */
+
+.mobile-menu {
+    position: fixed;
+
+    inset: 0;
+
+    height: 100dvh;
+
+    z-index: 4999;
+
+    background: rgba(3,3,3,.98);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(-15px);
+
+    transition: .35s;
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0);
+}
+
+.mobile-menu-small {
+    color: #555;
+
+    font-size: 8px;
+
+    letter-spacing: 6px;
+
+    margin-bottom: 35px;
+}
+
+.mobile-menu a {
+    margin: 10px;
+
+    color: white;
+
+    font-size: clamp(28px,9vw,42px);
+
+    letter-spacing: 5px;
+}
+
+.mobile-menu-bottom {
+    position: absolute;
+
+    bottom: 35px;
+
+    color: #444;
+
+    font-size: 8px;
+
+    letter-spacing: 4px;
+}
+
+
+/* ==================================================
+   CONTACT HERO
+================================================== */
+
+.hero {
+    position: relative;
+
+    min-height: 78svh;
+
+    padding:
+        160px 7%
+        90px;
+
+    display: flex;
+    align-items: flex-end;
+
+    overflow: hidden;
+
+    isolation: isolate;
+
+    background: #050505;
+}
+
+
+/* ==================================================
+   BLURRED RAVENIX GROUP
+================================================== */
+
+.hero-photo {
+    position: absolute;
+
+    inset: -30px;
+
+    z-index: -4;
+
+    background-image: url("ravenix-bg.png");
+
+    background-size: cover;
+    background-position: center 28%;
+
+    filter:
+        blur(11px)
+        brightness(.36)
+        saturate(.65);
+
+    transform: scale(1.08);
+
+    animation:
+        backgroundMove
+        14s ease-in-out
+        infinite alternate;
+}
+
+
+/* DARK LAYER OVER MEMBERS */
+
+.hero-darkness {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: -3;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(5,5,5,.80) 0%,
+            rgba(5,5,5,.53) 48%,
+            rgba(5,5,5,.72) 100%
+        ),
+
+        linear-gradient(
+            180deg,
+            rgba(5,5,5,.30) 0%,
+            rgba(5,5,5,.42) 55%,
+            #050505 100%
+        );
+}
+
+
+/* SOFT CINEMATIC GLOW */
+
+.hero-glow {
+    position: absolute;
+
+    width: 800px;
+    height: 800px;
+
+    right: -200px;
+    top: -250px;
+
+    z-index: -2;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.035);
+
+    filter: blur(100px);
+
+    animation:
+        heroGlow
+        8s ease-in-out
+        infinite alternate;
+}
+
+
+/* VERY SUBTLE FILM GRAIN */
+
+.hero-grain {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: -1;
+
+    opacity: .08;
+
+    pointer-events: none;
+
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.025) 0,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+}
+
+
+@keyframes backgroundMove {
+
+    from {
+        transform:
+            scale(1.08)
+            translateX(-8px);
+    }
+
+    to {
+        transform:
+            scale(1.12)
+            translateX(8px);
+    }
+
+}
+
+
+@keyframes heroGlow {
+
+    from {
+        transform: scale(.9);
+    }
+
+    to {
+        transform: scale(1.15);
+    }
+
+}
+
+
+/* ==================================================
+   HERO TEXT
+================================================== */
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+}
+
+.hero-small {
+    color: rgba(255,255,255,.55);
+
+    font-size: 9px;
+
+    letter-spacing: 7px;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(70px,13vw,180px);
+
+    line-height: .8;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 5px 30px rgba(0,0,0,.9);
+}
+
+.hero-bottom {
+    margin-top: 45px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 30px;
+}
+
+.hero-line {
+    width: 80px;
+    height: 1px;
+
+    background: rgba(255,255,255,.5);
+}
+
+.hero-bottom p {
+    color: #aaa;
+
+    font-size: 10px;
+
+    letter-spacing: 5px;
+
+    line-height: 1.8;
+}
+
+
+/* ==================================================
+   COMPANY INTRO
+================================================== */
+
+.company-intro {
+    position: relative;
+
+    padding:
+        130px 7%
+        110px;
+
+    border-top:
+        1px solid #151515;
+
+    background:
+        linear-gradient(
+            180deg,
+            #050505,
+            #080808
+        );
+
+    overflow: hidden;
+}
+
+.company-number {
+    color: #555;
+
+    font-size: 9px;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 25px;
+}
+
+.company-name {
+    max-width: 1100px;
+
+    font-size: clamp(48px,8vw,105px);
+
+    line-height: .95;
+
+    letter-spacing: 2px;
+}
+
+.company-name span {
+    color: #444;
+}
+
+.company-tagline {
+    margin-top: 45px;
+
+    color: #aaa;
+
+    font-size: clamp(18px,2vw,26px);
+
+    font-style: italic;
+
+    letter-spacing: 1px;
+}
+
+
+/* ==================================================
+   CONTACT DIRECTORY
+================================================== */
+
+.directory {
+    padding:
+        60px 7%
+        150px;
+
+    background: #050505;
+}
+
+.directory-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    padding-bottom: 30px;
+
+    border-bottom:
+        1px solid #252525;
+}
+
+.directory-heading p {
+    color: #555;
+
+    font-size: 9px;
+
+    letter-spacing: 5px;
+}
+
+.directory-heading h2 {
+    font-size: clamp(35px,5vw,65px);
+
+    letter-spacing: 2px;
+}
+
+
+/* ==================================================
+   INFO ROW
+================================================== */
+
+.info-row {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        60px
+        minmax(190px,.8fr)
+        1.4fr
+        50px;
+
+    gap: 30px;
+
+    align-items: center;
+
+    min-height: 135px;
+
+    border-bottom:
+        1px solid #1c1c1c;
+
+    transition:
+        background .35s,
+        padding .35s;
+}
+
+.info-row::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -1px;
+
+    width: 0;
+    height: 1px;
+
+    background: white;
+
+    transition: width .5s;
+}
+
+.info-row:hover {
+    background:
+        rgba(255,255,255,.015);
+
+    padding-left: 15px;
+}
+
+.info-row:hover::before {
+    width: 100%;
+}
+
+.info-number {
+    color: #444;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+}
+
+.info-label {
+    color: #777;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    line-height: 1.6;
+}
+
+.info-value {
+    font-size: clamp(17px,2vw,25px);
+
+    line-height: 1.5;
+}
+
+.info-arrow {
+    color: #555;
+
+    font-size: 20px;
+
+    text-align: right;
+
+    transition:
+        transform .3s,
+        color .3s;
+}
+
+.info-row.link-row {
+    cursor: pointer;
+}
+
+.info-row.link-row:hover
+.info-arrow {
+    color: white;
+
+    transform:
+        translateX(6px);
+}
+
+
+/* ==================================================
+   LEADERSHIP
+================================================== */
+
+.leadership {
+    padding:
+        140px 7%;
+
+    border-top:
+        1px solid #151515;
+
+    background:
+        linear-gradient(
+            180deg,
+            #080808,
+            #050505
+        );
+}
+
+.leadership-header {
+    margin-bottom: 70px;
+}
+
+.leadership-header p {
+    color: #555;
+
+    font-size: 9px;
+
+    letter-spacing: 5px;
+}
+
+.leadership-header h2 {
+    margin-top: 20px;
+
+    font-size: clamp(45px,7vw,90px);
+
+    letter-spacing: 3px;
+}
+
+.leadership-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 25px;
+
+    max-width: 1200px;
+}
+
+
+/* ==================================================
+   LEADERSHIP CARDS
+================================================== */
+
+.leader-card {
+    position: relative;
+
+    min-height: 300px;
+
+    padding: 45px;
+
+    overflow: hidden;
+
+    border:
+        1px solid #222;
+
+    background: #090909;
+
+    transition:
+        transform .4s,
+        border-color .4s;
+}
+
+.leader-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    right: -170px;
+    top: -170px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.045);
+
+    filter: blur(20px);
+
+    transition: transform .6s;
+}
+
+.leader-card:hover {
+    transform:
+        translateY(-5px);
+
+    border-color: #333;
+}
+
+.leader-card:hover::before {
+    transform: scale(1.5);
+}
+
+.card-small {
+    position: relative;
+
+    z-index: 2;
+
+    color: #555;
+
+    font-size: 8px;
+
+    letter-spacing: 5px;
+}
+
+.leader-card h3 {
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 80px;
+
+    font-size: clamp(30px,4vw,50px);
+
+    letter-spacing: 2px;
+}
+
+.leader-card p {
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 15px;
+
+    color: #888;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    line-height: 1.8;
+}
+
+
+/* ==================================================
+   LOCATION
+================================================== */
+
+.location {
+    position: relative;
+
+    padding:
+        150px 7%;
+
+    overflow: hidden;
+
+    border-top:
+        1px solid #151515;
+
+    text-align: center;
+
+    background: #050505;
+}
+
+.location::before {
+    content: "SEOUL";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    color: transparent;
+
+    font-size: clamp(100px,20vw,300px);
+
+    font-weight: bold;
+
+    letter-spacing: 15px;
+
+    -webkit-text-stroke:
+        1px #151515;
+
+    pointer-events: none;
+}
+
+.location-content {
+    position: relative;
+
+    z-index: 2;
+}
+
+.location-small {
+    color: #555;
+
+    font-size: 9px;
+
+    letter-spacing: 6px;
+}
+
+.location h2 {
+    margin-top: 25px;
+
+    font-size: clamp(40px,7vw,85px);
+
+    letter-spacing: 3px;
+}
+
+.location p {
+    margin-top: 20px;
+
+    color: #888;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+}
+
+
+/* ==================================================
+   SILENT VEIL BRANDING
+================================================== */
+
+.branding {
+    min-height: 650px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding:
+        100px 20px;
+
+    overflow: hidden;
+
+    border-top:
+        1px solid #151515;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #181818,
+            #050505 65%
+        );
+}
+
+.branding::before,
+.branding::after {
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    filter: blur(120px);
+
+    opacity: .08;
+}
+
+.branding::before {
+    left: -250px;
+    top: 0;
+
+    background: white;
+
+    animation:
+        glowOne
+        8s ease-in-out
+        infinite alternate;
+}
+
+.branding::after {
+    right: -250px;
+    bottom: 0;
+
+    background: white;
+
+    animation:
+        glowTwo
+        9s ease-in-out
+        infinite alternate;
+}
+
+@keyframes glowOne {
+
+    from {
+        transform:
+            translateX(0);
+    }
+
+    to {
+        transform:
+            translateX(180px);
+    }
+
+}
+
+@keyframes glowTwo {
+
+    from {
+        transform:
+            translateX(0);
+    }
+
+    to {
+        transform:
+            translateX(-180px);
+    }
+
+}
+
+.branding-content {
+    position: relative;
+
+    z-index: 2;
+}
+
+.branding-small {
+    color: #555;
+
+    font-size: 9px;
+
+    letter-spacing: 7px;
+}
+
+.branding h2 {
+    margin-top: 25px;
+
+    font-size: clamp(50px,9vw,120px);
+
+    line-height: .95;
+
+    letter-spacing: 5px;
+}
+
+.branding-line {
+    width: 70px;
+    height: 1px;
+
+    margin:
+        40px auto;
+
+    background: #555;
+}
+
+.branding-tagline {
+    color: #aaa;
+
+    font-size: clamp(17px,2vw,25px);
+
+    font-style: italic;
+
+    letter-spacing: 1px;
+}
+
+.ravenix-brand {
+    margin-top: 70px;
+
+    color: #555;
+
+    font-size: 9px;
+
+    letter-spacing: 6px;
+}
+
+
+/* ==================================================
+   FICTIONAL NOTICE
+================================================== */
+
+.notice {
+    padding:
+        45px 7%;
+
+    border-top:
+        1px solid #1b1b1b;
+
+    border-bottom:
+        1px solid #1b1b1b;
+
+    background: #080808;
+
+    text-align: center;
+}
+
+.notice-label {
+    color: #666;
+
+    font-size: 8px;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 15px;
+}
+
+.notice p {
+    max-width: 800px;
+
+    margin: auto;
+
+    color: #555;
+
+    font-size: 11px;
+
+    line-height: 1.8;
+}
+
+
+/* ==================================================
+   FOOTER
+================================================== */
+
+footer {
+    padding:
+        40px 7%;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    color: #555;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    background: #050505;
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media(max-width:700px) {
+
+    nav {
+        height: 65px;
+
+        padding:
+            0 18px;
+    }
+
+    .logo {
+        font-size: 16px;
+
+        letter-spacing: 5px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+
+    /* HERO */
+
+    .hero {
+        min-height: 620px;
+
+        padding:
+            130px 20px
+            70px;
+    }
+
+    .hero-photo {
+        inset: -25px;
+
+        background-position: center top;
+
+        filter:
+            blur(15px)
+            brightness(.28)
+            saturate(.55);
+
+        transform:
+            scale(1.12);
+    }
+
+    .hero-darkness {
+        background:
+
+            linear-gradient(
+                180deg,
+                rgba(5,5,5,.45),
+                rgba(5,5,5,.60) 55%,
+                #050505 100%
+            );
+    }
+
+    .hero-small {
+        font-size: 7px;
+
+        letter-spacing: 5px;
+    }
+
+    .hero h1 {
+        font-size:
+            clamp(55px,19vw,85px);
+
+        letter-spacing: 1px;
+    }
+
+    .hero-bottom {
+        display: block;
+
+        margin-top: 35px;
+    }
+
+    .hero-line {
+        margin-bottom: 25px;
+    }
+
+    .hero-bottom p {
+        font-size: 8px;
+
+        letter-spacing: 3px;
+    }
+
+
+    /* COMPANY */
+
+    .company-intro {
+        padding:
+            90px 20px
+            70px;
+    }
+
+    .company-name {
+        font-size:
+            clamp(42px,13vw,65px);
+    }
+
+    .company-tagline {
+        font-size: 18px;
+
+        line-height: 1.7;
+    }
+
+
+    /* DIRECTORY */
+
+    .directory {
+        padding:
+            40px 20px
+            100px;
+    }
+
+    .directory-heading {
+        display: block;
+    }
+
+    .directory-heading h2 {
+        margin-top: 15px;
+
+        font-size: 38px;
+    }
+
+    .info-row {
+        grid-template-columns:
+            35px
+            1fr
+            25px;
+
+        gap: 15px;
+
+        min-height: 120px;
+
+        padding:
+            25px 0;
+    }
+
+    .info-label {
+        grid-column:
+            2 / 3;
+    }
+
+    .info-value {
+        grid-column:
+            2 / 3;
+
+        font-size: 16px;
+
+        overflow-wrap: anywhere;
+    }
+
+    .info-number {
+        grid-row:
+            1 / 3;
+    }
+
+    .info-arrow {
+        grid-column:
+            3 / 4;
+
+        grid-row:
+            1 / 3;
+
+        align-self: center;
+    }
+
+    .info-row:hover {
+        padding-left: 0;
+    }
+
+
+    /* LEADERSHIP */
+
+    .leadership {
+        padding:
+            90px 20px;
+    }
+
+    .leadership-header {
+        margin-bottom: 45px;
+    }
+
+    .leadership-header h2 {
+        font-size: 45px;
+    }
+
+    .leadership-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .leader-card {
+        min-height: 250px;
+
+        padding: 30px;
+    }
+
+    .leader-card h3 {
+        margin-top: 60px;
+
+        font-size: 32px;
+    }
+
+
+    /* LOCATION */
+
+    .location {
+        padding:
+            110px 20px;
+    }
+
+    .location::before {
+        font-size: 100px;
+
+        letter-spacing: 5px;
+    }
+
+    .location h2 {
+        font-size: 45px;
+    }
+
+    .location p {
+        font-size: 10px;
+
+        line-height: 1.8;
+    }
+
+
+    /* BRAND */
+
+    .branding {
+        min-height: 550px;
+
+        padding:
+            80px 20px;
+    }
+
+    .branding h2 {
+        font-size:
+            clamp(45px,14vw,70px);
+
+        letter-spacing: 3px;
+    }
+
+    .branding-tagline {
+        font-size: 17px;
+    }
+
+    .ravenix-brand {
+        line-height: 1.8;
+    }
+
+
+    /* NOTICE */
+
+    .notice {
+        padding:
+            40px 20px;
+    }
+
+    .notice p {
+        font-size: 10px;
+    }
+
+
+    /* FOOTER */
+
+    footer {
+        display: block;
+
+        text-align: center;
+
+        line-height: 2.2;
+    }
+
+    footer span {
+        display: block;
+    }
+
+}
+
+
+/* ==================================================
+   VERY SMALL PHONE
+================================================== */
+
+@media(max-width:360px) {
+
+    .hero h1 {
+        font-size: 52px;
+    }
+
+    .company-name {
+        font-size: 39px;
+    }
+
+    .branding h2 {
+        font-size: 42px;
+    }
+
+}
+
+
+/* ==================================================
+   REDUCED MOTION
+================================================== */
+
+@media(prefers-reduced-motion:reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration:
+            .01ms !important;
+
+        transition-duration:
+            .01ms !important;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     NAVIGATION
+================================================== -->
+
+<nav>
+
+    <a
+        href="home.html"
+        class="logo"
+    >
+        RAVENIX
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="home.html">
+            HOME
+        </a>
+
+        <a href="home.html#members">
+            MEMBERS
+        </a>
+
+        <a href="songs.html">
+            SONGS
+        </a>
+
+        <a href="about.html">
+            ABOUT
+        </a>
+
+        <a
+            href="contact.html"
+            class="active"
+        >
+            CONTACT
+        </a>
+
+    </div>
+
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        onclick="toggleMenu()"
+        aria-label="Open menu"
+    >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+</nav>
+
+
+<!-- ==================================================
+     MOBILE MENU
+================================================== -->
+
+<div
+    class="mobile-menu"
+    id="mobileMenu"
+>
+
+    <div class="mobile-menu-small">
+        RAVENIX OFFICIAL
+    </div>
+
+    <a href="home.html">
+        HOME
+    </a>
+
+    <a href="home.html#members">
+        MEMBERS
+    </a>
+
+    <a href="songs.html">
+        SONGS
+    </a>
+
+    <a href="about.html">
+        ABOUT
+    </a>
+
+    <a
+        href="contact.html"
+        onclick="closeMenu()"
+    >
+        CONTACT
+    </a>
+
+    <div class="mobile-menu-bottom">
+        FIVE SHADOWS • ONE LEGACY
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     HERO WITH BLURRED RAVENIX PHOTO
+================================================== -->
+
+<section class="hero">
+
+    <!-- GROUP PHOTO -->
+    <div class="hero-photo"></div>
+
+    <!-- DARK OVERLAY -->
+    <div class="hero-darkness"></div>
+
+    <!-- SOFT LIGHT -->
+    <div class="hero-glow"></div>
+
+    <!-- FILM EFFECT -->
+    <div class="hero-grain"></div>
+
+
+    <div class="hero-content">
+
+        <div class="hero-small">
+            SILENT VEIL ENTERTAINMENT
+        </div>
+
+        <h1>
+            CONTACT
+        </h1>
+
+
+        <div class="hero-bottom">
+
+            <div class="hero-line"></div>
+
+            <p>
+                BUSINESS • MEDIA • ARTIST INQUIRIES
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     COMPANY INTRO
+================================================== -->
+
+<section class="company-intro">
+
+    <div class="company-number">
+        01 / COMPANY
+    </div>
+
+    <h2 class="company-name">
+
+        SILENT VEIL<br>
+
+        <span>
+            ENTERTAINMENT
+        </span>
+
+    </h2>
+
+    <p class="company-tagline">
+        “Where silence becomes a voice.”
+    </p>
+
+</section>
+
+
+<!-- ==================================================
+     CONTACT DIRECTORY
+================================================== -->
+
+<section class="directory">
+
+    <div class="directory-heading">
+
+        <p>
+            02 / CONTACT DIRECTORY
+        </p>
+
+        <h2>
+            GET IN TOUCH
+        </h2>
+
+    </div>
+
+
+    <a
+        href="mailto:business@silentveil.example"
+        class="info-row link-row"
+    >
+
+        <div class="info-number">
+            01
+        </div>
+
+        <div class="info-label">
+            BUSINESS &amp;<br>
+            PARTNERSHIP INQUIRIES
+        </div>
+
+        <div class="info-value">
+            business@silentveil.example
+        </div>
+
+        <div class="info-arrow">
+            →
+        </div>
+
+    </a>
+
+
+    <a
+        href="mailto:press@silentveil.example"
+        class="info-row link-row"
+    >
+
+        <div class="info-number">
+            02
+        </div>
+
+        <div class="info-label">
+            MEDIA &amp;<br>
+            PRESS INQUIRIES
+        </div>
+
+        <div class="info-value">
+            press@silentveil.example
+        </div>
+
+        <div class="info-arrow">
+            →
+        </div>
+
+    </a>
+
+
+    <a
+        href="mailto:ravenix@silentveil.example"
+        class="info-row link-row"
+    >
+
+        <div class="info-number">
+            03
+        </div>
+
+        <div class="info-label">
+            ARTIST<br>
+            INQUIRIES
+        </div>
+
+        <div class="info-value">
+            ravenix@silentveil.example
+        </div>
+
+        <div class="info-arrow">
+            →
+        </div>
+
+    </a>
+
+
+    <div class="info-row">
+
+        <div class="info-number">
+            04
+        </div>
+
+        <div class="info-label">
+            TELEPHONE
+        </div>
+
+        <div class="info-value">
+            +1 (202) 555-0176
+        </div>
+
+        <div class="info-arrow">
+            —
+        </div>
+
+    </div>
+
+
+    <div class="info-row">
+
+        <div class="info-number">
+            05
+        </div>
+
+        <div class="info-label">
+            HEAD OFFICE
+        </div>
+
+        <div class="info-value">
+            Seoul, Republic of Korea
+        </div>
+
+        <div class="info-arrow">
+            —
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     LEADERSHIP
+================================================== -->
+
+<section class="leadership">
+
+    <div class="leadership-header">
+
+        <p>
+            03 / LEADERSHIP &amp; MANAGEMENT
+        </p>
+
+        <h2>
+            BEHIND RAVENIX
+        </h2>
+
+    </div>
+
+
+    <div class="leadership-grid">
+
+
+        <div class="leader-card">
+
+            <div class="card-small">
+                FOUNDER &amp; CEO
+            </div>
+
+            <h3>
+                KIMI AURELIA
+            </h3>
+
+            <p>
+                SILENT VEIL ENTERTAINMENT
+            </p>
+
+        </div>
+
+
+        <div class="leader-card">
+
+            <div class="card-small">
+                ARTIST MANAGEMENT
+            </div>
+
+            <h3>
+                RAVENIX
+            </h3>
+
+            <p>
+                MANAGEMENT DIVISION
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     LOCATION
+================================================== -->
+
+<section class="location">
+
+    <div class="location-content">
+
+        <div class="location-small">
+            HEAD OFFICE
+        </div>
+
+        <h2>
+            SEOUL
+        </h2>
+
+        <p>
+            REPUBLIC OF KOREA
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     BRANDING
+================================================== -->
+
+<section class="branding">
+
+    <div class="branding-content">
+
+        <div class="branding-small">
+            SILENT VEIL ENTERTAINMENT
+        </div>
+
+        <h2>
+            SILENT<br>
+            VEIL
+        </h2>
+
+        <div class="branding-line"></div>
+
+        <p class="branding-tagline">
+            Where silence becomes a voice.
+        </p>
+
+        <div class="ravenix-brand">
+            HOME OF RAVENIX
+            <br><br>
+            FIVE SHADOWS. ONE LEGACY.
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     FICTIONAL NOTICE
+================================================== -->
+
+<section class="notice">
+
+    <div class="notice-label">
+        FICTIONAL PROJECT NOTICE
+    </div>
+
+    <p>
+        RAVENIX and Silent Veil Entertainment are fictional.
+        All contact information displayed is fictional.
+    </p>
+
+</section>
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer>
+
+    <span>
+        © 2026 SILENT VEIL ENTERTAINMENT
+    </span>
+
+    <span>
+        RAVENIX OFFICIAL WEBSITE
+    </span>
+
+</footer>
+
+
+<script>
+
+/* ==================================================
+   MOBILE MENU
+================================================== */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+const mobileMenu =
+    document.getElementById(
+        "mobileMenu"
+    );
+
+
+function toggleMenu() {
+
+    const open =
+        mobileMenu.classList.toggle(
+            "active"
+        );
+
+    menuButton.classList.toggle(
+        "active",
+        open
+    );
+
+    document.body.classList.toggle(
+        "no-scroll",
+        open
+    );
+
+}
+
+
+function closeMenu() {
+
+    mobileMenu.classList.remove(
+        "active"
+    );
+
+    menuButton.classList.remove(
+        "active"
+    );
+
+    document.body.classList.remove(
+        "no-scroll"
+    );
+
+}
+
+
+/* ==================================================
+   ESCAPE KEY
+================================================== */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape" &&
+            mobileMenu.classList.contains(
+                "active"
+            )
+        ) {
+
+            closeMenu();
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   DESKTOP RESIZE
+================================================== */
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        if (
+            window.innerWidth > 700
+        ) {
+
+            closeMenu();
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RAVENIX Official</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        /* INTERACTIVE BACKGROUND */
+
+        .background {
+            position: fixed;
+            top: -5%;
+            left: -5%;
+            width: 110%;
+            height: 110%;
+
+            background-image: url("ravenix-bg.png");
+            background-size: cover;
+            background-position: center;
+
+            transform: scale(1.05);
+            transition: transform 0.15s ease-out;
+
+            animation: slowZoom 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowZoom {
+            from {
+                background-size: 100%;
+            }
+
+            to {
+                background-size: 108%;
+            }
+        }
+
+        /* DARK CINEMATIC OVERLAY */
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,0.25),
+                    rgba(0,0,0,0.45),
+                    rgba(0,0,0,0.85)
+                );
+
+            z-index: 1;
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            padding: 30px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 6px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+
+            margin-left: 35px;
+
+            font-size: 12px;
+            letter-spacing: 2px;
+
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* MAIN CONTENT */
+
+        .hero {
+            position: relative;
+
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            z-index: 5;
+        }
+
+        .small-title {
+            font-size: 12px;
+            letter-spacing: 8px;
+
+            margin-bottom: 20px;
+
+            opacity: 0.8;
+        }
+
+        h1 {
+            font-size: clamp(70px, 12vw, 160px);
+
+            letter-spacing: 15px;
+
+            line-height: 0.9;
+
+            text-shadow:
+                0 5px 30px rgba(0,0,0,0.9),
+                0 0 50px rgba(255,255,255,0.15);
+        }
+
+        .tagline {
+            margin-top: 30px;
+
+            font-size: 13px;
+
+            letter-spacing: 7px;
+
+            text-shadow: 0 3px 15px black;
+        }
+
+        /* MEMBER NAMES */
+
+        .members {
+            margin-top: 35px;
+
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            gap: 25px;
+        }
+
+        .members span {
+            font-size: 11px;
+            letter-spacing: 3px;
+
+            opacity: 0.7;
+
+            transition: 0.3s;
+        }
+
+        .members span:hover {
+            opacity: 1;
+            transform: translateY(-4px);
+        }
+
+        /* ENTER BUTTON */
+
+        .enter {
+            display: inline-block;
+
+            margin-top: 40px;
+
+            padding: 15px 42px;
+
+            border: 1px solid white;
+            border-radius: 40px;
+
+            color: white;
+            text-decoration: none;
+
+            font-size: 11px;
+            letter-spacing: 4px;
+
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+
+            background: rgba(0,0,0,0.25);
+
+            transition: 0.4s;
+        }
+
+        .enter:hover {
+            background: white;
+            color: black;
+
+            transform: translateY(-3px);
+
+            box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 25px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            h1 {
+                letter-spacing: 7px;
+            }
+
+            .tagline {
+                font-size: 10px;
+                letter-spacing: 4px;
+            }
+
+            .members {
+                padding: 0 20px;
+                gap: 15px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- BACKGROUND -->
+
+    <div class="background" id="background"></div>
+
+    <div class="overlay"></div>
+
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <div class="logo">
+            RAVENIX
+        </div>
+
+        <div class="nav-links">
+
+            <a href="home.html">
+                HOME
+            </a>
+
+            <a href="home.html#members">
+                MEMBERS
+            </a>
+
+            <a href="songs.html">
+                SONGS
+            </a>
+
+            <a href="about.html">
+                ABOUT
+            </a>
+
+            <a href="contact.html">
+                CONTACT
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div>
+
+            <div class="small-title">
+                OFFICIAL WEBSITE
+            </div>
+
+            <h1>
+                RAVENIX
+            </h1>
+
+            <div class="tagline">
+                FIVE SHADOWS. ONE LEGACY.
+            </div>
+
+
+            <div class="members">
+
+                <span>KAEL</span>
+                <span>ZAYN</span>
+                <span>RAYDEN</span>
+                <span>ELIOR</span>
+                <span>NOX</span>
+
+            </div>
+
+
+            <a href="home.html" class="enter">
+                ENTER
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <script>
+
+        const background =
+            document.getElementById("background");
+
+        document.addEventListener(
+            "mousemove",
+            function(event) {
+
+                const x =
+                    (event.clientX / window.innerWidth - 0.5) * 18;
+
+                const y =
+                    (event.clientY / window.innerHeight - 0.5) * 18;
+
+                background.style.transform =
+                    `scale(1.07) translate(${-x}px, ${-y}px)`;
+
+            }
+        );
+
+        document.addEventListener(
+            "mouseleave",
+            function() {
+
+                background.style.transform =
+                    "scale(1.07) translate(0px, 0px)";
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
